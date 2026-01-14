@@ -1,0 +1,237 @@
+---
+sidebar_position: 1
+---
+
+# Multi-line Text
+
+Cell content can include line breaks, formatting, and complex text structures.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Basic Multi-line Content
+
+<ListTable headerRows={1} caption="Server Configuration">
+- - Component
+  - Configuration
+  - Notes
+- - Web Server
+  - Port: 8080\
+    Host: 0.0.0.0\
+    SSL: Enabled
+  - Production ready
+- - Database
+  - Type: PostgreSQL\
+    Version: 14.2\
+    Pool: 20 connections
+  - Requires backup config
+- - Cache
+  - Type: Redis\
+    Memory: 2GB\
+    Eviction: LRU
+  - Monitor memory usage
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Server Configuration">
+- - Component
+  - Configuration
+  - Notes
+- - Web Server
+  - Port: 8080\
+    Host: 0.0.0.0\
+    SSL: Enabled
+  - Production ready
+...
+</ListTable>
+```
+
+## Lists in Cells
+
+<ListTable headerRows={1} caption="Feature Comparison">
+- - Plan
+  - Features
+  - Price
+- - Starter
+  - - 5 projects
+    - 1 GB storage
+    - Email support
+  - $9/month
+- - Professional
+  - - Unlimited projects
+    - 50 GB storage
+    - Priority support
+    - Advanced analytics
+    - API access
+  - $29/month
+- - Enterprise
+  - - Everything in Pro
+    - Unlimited storage
+    - 24/7 phone support
+    - Custom integrations
+    - SLA guarantee
+  - Custom
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Feature Comparison">
+- - Plan
+  - Features
+  - Price
+- - Starter
+  - - 5 projects
+    - 1 GB storage
+    - Email support
+  - $9/month
+- - Professional
+  - - Unlimited projects
+    - 50 GB storage
+    - Priority support
+    - Advanced analytics
+    - API access
+  - $29/month
+- - Enterprise
+  - - Everything in Pro
+    - Unlimited storage
+    - 24/7 phone support
+    - Custom integrations
+    - SLA guarantee
+  - Custom
+</ListTable>
+```
+
+## Formatted Descriptions
+
+<ListTable headerRows={1} caption="Environment Variables">
+- - Variable
+  - Description
+  - Example
+- - `DATABASE_URL`
+  - **Required**\
+    PostgreSQL connection string\
+    _Format: postgresql://user:pass@host:port/db_
+  - `postgresql://app:secret@localhost:5432/myapp`
+- - `API_KEY`
+  - **Required**\
+    Third-party API authentication key\
+    _Obtain from dashboard_
+  - `sk_live_abc123...`
+- - `LOG_LEVEL`
+  - **Optional**\
+    Application logging verbosity\
+    _Default: info_\
+    _Options: error, warn, info, debug_
+  - `info`
+- - `PORT`
+  - **Optional**\
+    HTTP server port\
+    _Default: 3000_
+  - `8080`
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Environment Variables">
+- - Variable
+  - Description
+  - Example
+- - `DATABASE_URL`
+  - **Required**\
+    PostgreSQL connection string\
+    _Format: postgresql://user:pass@host:port/db_
+  - `postgresql://app:secret@localhost:5432/myapp`
+- - `API_KEY`
+  - **Required**\
+    Third-party API authentication key\
+    _Obtain from dashboard_
+  - `sk_live_abc123...`
+- - `LOG_LEVEL`
+  - **Optional**\
+    Application logging verbosity\
+    _Default: info_\
+    _Options: error, warn, info, debug_
+  - `info`
+- - `PORT`
+  - **Optional**\
+    HTTP server port\
+    _Default: 3000_
+  - `8080`
+</ListTable>
+```
+
+## Long Descriptions
+
+<ListTable headerRows={1} caption="API Endpoints">
+- - Endpoint
+  - Description
+  - Authentication
+- - `POST /api/users`
+  - Creates a new user account
+
+    **Request Body:**
+    - name (required)
+    - email (required)
+    - password (required)
+
+    **Returns:**\
+    User object with generated ID and auth token
+  - API Key required
+- - `GET /api/users/:id`
+  - Retrieves user information
+    
+    **Parameters:**
+    - id: User ID (UUID)
+    
+    **Returns:**\
+    User object (excludes password)
+  - Bearer token or API Key
+- - `DELETE /api/users/:id`
+  - Permanently deletes a user
+    
+    **Warning:** This action cannot be undone.\
+    All associated data will be removed.
+    
+    **Returns:**
+    204 No Content on success
+  - Bearer token (admin only)
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="API Endpoints">
+- - Endpoint
+  - Description
+  - Authentication
+- - `POST /api/users`
+  - Creates a new user account
+
+    **Request Body:**
+
+    - name (required)
+    - email (required)
+    - password (required)
+    
+    **Returns:**\
+    User object with generated ID and auth token
+  - API Key required
+- - `GET /api/users/:id`
+  - Retrieves user information
+    
+    **Parameters:**
+    - id: User ID (UUID)
+    
+    **Returns:**\
+    User object (excludes password)
+  - Bearer token or API Key
+- - `DELETE /api/users/:id`
+  - Permanently deletes a user
+    
+    **Warning:** This action cannot be undone.\
+    All associated data will be removed.
+    
+    **Returns:**\
+    204 No Content on success
+  - Bearer token (admin only)
+</ListTable>
+```

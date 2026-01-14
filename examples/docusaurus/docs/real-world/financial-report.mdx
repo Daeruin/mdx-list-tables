@@ -1,0 +1,337 @@
+---
+sidebar_position: 3
+---
+
+# Financial Reports
+
+Complex financial tables with merged cells and calculated totals.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Quarterly Financial Summary
+
+<ListTable headerRows={3} footerRows={1} caption="FY 2024 Financial Performance (in thousands)">
+- - [c7] Acme Corporation Financial Report
+- - [r2] Quarter
+  - [c3] Revenue
+  - [c3] Expenses
+- - _
+  - Products
+  - Services
+  - Total
+  - Operating
+  - Marketing
+  - Total
+- - Q1
+  - $450
+  - $280
+  - **$730**
+  - $320
+  - $85
+  - **$405**
+- - Q2
+  - $520
+  - $310
+  - **$830**
+  - $350
+  - $95
+  - **$445**
+- - Q3
+  - $580
+  - $340
+  - **$920**
+  - $380
+  - $105
+  - **$485**
+- - Q4
+  - $650
+  - $390
+  - **$1,040**
+  - $420
+  - $120
+  - **$540**
+- - **Annual Total**
+  - **$2,200**
+  - **$1,320**
+  - **$3,520**
+  - **$1,470**
+  - **$405**
+  - **$1,875**
+</ListTable>
+
+## Budget vs Actual Report
+
+<ListTable headerRows={2} headerColumns={1} footerRows={2} caption="Q4 2024 Budget Analysis">
+- - [r2] Department
+  - [c2] Budget
+  - [c2] Actual
+  - [r2] Variance
+- - _
+  - Q4
+  - YTD
+  - Q4
+  - YTD
+  - _
+- - **Engineering**
+  - $250
+  - $950
+  - $245
+  - $920
+  - +$30 ✅
+- - **Sales**
+  - $180
+  - $700
+  - $195
+  - $750
+  - -$50 ⚠️
+- - **Marketing**
+  - $120
+  - $450
+  - $125
+  - $465
+  - -$15 ⚠️
+- - **Operations**
+  - $90
+  - $340
+  - $85
+  - $325
+  - +$15 ✅
+- - **HR**
+  - $60
+  - $230
+  - $58
+  - $225
+  - +$5 ✅
+- - **IT**
+  - $80
+  - $310
+  - $82
+  - $318
+  - -$8 ⚠️
+- - [c5] **Variance Summary**
+  - _
+  - _
+  - _
+  - _
+  - **-$23** (0.8% over)
+</ListTable>
+
+## Balance Sheet
+
+<ListTable headerRows={2} headerColumns={1} caption="Balance Sheet - December 31, 2024">
+- - [c3] Assets & Liabilities
+- - Category
+  - Line Item
+  - Amount
+- - [r5] **Assets**
+  - Cash and equivalents
+  - $1,250,000
+- - _
+  - Accounts receivable
+  - $450,000
+- - _
+  - Inventory
+  - $320,000
+- - _
+  - Property & equipment
+  - $2,100,000
+- - _
+  - **Total Assets**
+  - **$4,120,000**
+- - [r4] **Liabilities**
+  - Accounts payable
+  - $280,000
+- - _
+  - Short-term debt
+  - $150,000
+- - _
+  - Long-term debt
+  - $850,000
+- - _
+  - **Total Liabilities**
+  - **$1,280,000**
+- - [r2] **Equity**
+  - Retained earnings
+  - $2,100,000
+- - _
+  - Common stock
+  - $740,000
+- - [c2] **Total Liabilities & Equity**
+  - _
+  - **$4,120,000**
+</ListTable>
+
+## Cash Flow Statement
+
+<ListTable headerRows={2} caption="Statement of Cash Flows - Year Ended 2024">
+- - [c5] Cash Flow Analysis (in thousands)
+- - Category
+  - Q1
+  - Q2
+  - Q3
+  - Q4
+- - **Operating Activities**
+  - $325
+  - $385
+  - $435
+  - $490
+- - **Investing Activities**
+  - -$180
+  - -$95
+  - -$120
+  - -$200
+- - **Financing Activities**
+  - $50
+  - -$75
+  - $30
+  - -$100
+- - **Net Cash Flow**
+  - **$195**
+  - **$215**
+  - **$345**
+  - **$190**
+- - **Beginning Balance**
+  - $1,000
+  - $1,195
+  - $1,410
+  - $1,755
+- - **Ending Balance**
+  - **$1,195**
+  - **$1,410**
+  - **$1,755**
+  - **$1,945**
+</ListTable>
+
+## Profitability Analysis
+
+<ListTable headerRows={2} headerColumns={1} footerRows={1} caption="Product Line Profitability - 2024">
+- - [r2] Product Line
+  - [c4] Quarterly Data
+  - _
+  - _
+  - _
+  - [r2] Annual Total
+  - [r2] Margin %
+- - _
+  - Q1
+  - Q2
+  - Q3
+  - Q4
+  - _
+  - _
+- - [r3] **Software**
+  - Rev: $280
+  - Rev: $320
+  - Rev: $360
+  - Rev: $420
+  - **$1,380**
+  - [r3] **68%**
+- - _
+  - Cost: $90
+  - Cost: $100
+  - Cost: $110
+  - Cost: $130
+  - **$430**
+  - _
+- - _
+  - Profit: $190
+  - Profit: $220
+  - Profit: $250
+  - Profit: $290
+  - **$950**
+  - _
+- - [r3] **Hardware**
+  - Rev: $180
+  - Rev: $210
+  - Rev: $240
+  - Rev: $280
+  - **$910**
+  - [r3] **42%**
+- - _
+  - Cost: $110
+  - Cost: $128
+  - Cost: $146
+  - Cost: $170
+  - **$554**
+  - _
+- - _
+  - Profit: $70
+  - Profit: $82
+  - Profit: $94
+  - Profit: $110
+  - **$356**
+  - _
+- - [r3] **Services**
+  - Rev: $140
+  - Rev: $165
+  - Rev: $190
+  - Rev: $220
+  - **$715**
+  - [r3] **55%**
+- - _
+  - Cost: $63
+  - Cost: $74
+  - Cost: $86
+  - Cost: $99
+  - **$322**
+  - _
+- - _
+  - Profit: $77
+  - Profit: $91
+  - Profit: $104
+  - Profit: $121
+  - **$393**
+  - _
+- - [c2] **Total Company**
+  - _
+  - [c4] **Combined Profit: $1,699**
+  - _
+  - _
+  - _
+  - **Avg: 57%**
+</ListTable>
+
+## Regional Performance
+
+<ListTable headerRows={2} headerColumns={1} caption="Regional Sales Performance - 2024">
+- - [r2] Region
+  - [c2] H1 2024
+  - [c2] H2 2024
+  - [r2] Growth
+- - _
+  - Revenue
+  - % of Total
+  - Revenue
+  - % of Total
+  - _
+- - **North America**
+  - $1,250
+  - 45%
+  - $1,485
+  - 47%
+  - +18.8%
+- - **Europe**
+  - $850
+  - 31%
+  - $975
+  - 31%
+  - +14.7%
+- - **Asia Pacific**
+  - $520
+  - 19%
+  - $595
+  - 19%
+  - +14.4%
+- - **Latin America**
+  - $140
+  - 5%
+  - $95
+  - 3%
+  - -32.1%
+- - **Total**
+  - **$2,760**
+  - **100%**
+  - **$3,150**
+  - **100%**
+  - **+14.1%**
+</ListTable>

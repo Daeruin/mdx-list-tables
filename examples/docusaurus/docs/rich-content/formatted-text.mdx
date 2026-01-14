@@ -1,0 +1,164 @@
+---
+sidebar_position: 2
+---
+
+# Formatted Text & Code
+
+Use inline code, bold, italic, and other formatting within table cells.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Inline Code
+
+<ListTable headerRows={1} caption="JavaScript Methods">
+- - Method
+  - Syntax
+  - Returns
+  - Description
+- - Array.map()
+  - `array.map(callback)`
+  - `Array`
+  - Creates new array with results of calling function on every element
+- - Array.filter()
+  - `array.filter(callback)`
+  - `Array`
+  - Creates new array with elements that pass the test
+- - Array.reduce()
+  - `array.reduce(callback, initial)`
+  - `any`
+  - Reduces array to single value
+- - String.split()
+  - `string.split(separator)`
+  - `Array`
+  - Splits string into array of substrings
+</ListTable>
+
+## Code Examples in Cells
+
+<ListTable headerRows={1} caption="React Hooks">
+- - Hook
+  - Example Usage
+  - Purpose
+- - `useState`
+  - ```jsx<br/>const [count, setCount] =<br/>&nbsp;&nbsp;useState(0);```
+  - Manage component state
+- - `useEffect`
+  - ```jsx<br/>useEffect(() => {`{`<br/>&nbsp;&nbsp;// side effect<br/>`}`}, [deps]);```
+  - Handle side effects
+- - `useCallback`
+  - ```jsx<br/>const fn = useCallback(<br/>&nbsp;&nbsp;() => {...}, [deps]<br/>);```
+  - Memoize functions
+- - `useMemo`
+  - ```jsx<br/>const value = useMemo(<br/>&nbsp;&nbsp;() => compute(), [deps]<br/>);```
+  - Memoize values
+</ListTable>
+
+## Mixed Formatting
+
+<ListTable headerRows={1} caption="Git Commands">
+- - Command
+  - Description
+  - Example
+- - `git commit`
+  - **Save changes** to local repository\
+    _Creates a snapshot of staged changes_
+  - `git commit -m "Add feature"`
+- - `git push`
+  - **Upload** local commits to remote\
+    _Updates remote branch_
+  - `git push origin main`
+- - `git pull`
+  - **Download** and merge remote changes\
+    _Combination of fetch + merge_
+  - `git pull origin main`
+- - `git rebase`
+  - **Reapply commits** on top of another base\
+    _⚠️ Rewrites history_
+  - `git rebase main`
+</ListTable>
+
+## Type Signatures
+
+<ListTable headerRows={1} caption="TypeScript Function Signatures">
+- - Function
+  - Signature
+  - Description
+- - fetchUser
+  - `(id: string) => Promise<User>`
+  - Fetches user by ID
+- - createUser
+  - `(data: UserInput) => Promise<User>`
+  - Creates new user
+- - updateUser
+  - `(id: string, data: Partial<User>) => Promise<User>`
+  - Updates existing user
+- - deleteUser
+  - `(id: string) => Promise<void>`
+  - Deletes user permanently
+- - listUsers
+  - `(filters?: UserFilters) => Promise<User[]>`
+  - Lists users with optional filters
+</ListTable>
+
+## Emphasis and Highlighting
+
+<ListTable headerRows={1} caption="Security Considerations">
+- - Issue
+  - Severity
+  - Mitigation
+- - SQL Injection
+  - **🔴 Critical**
+  - Use **parameterized queries**\
+    _Never concatenate user input_
+- - XSS Attacks
+  - **🟠 High**
+  - **Sanitize all user input**\
+    _Use Content Security Policy_
+- - CSRF
+  - **🟠 High**
+  - Use **CSRF tokens**\
+    _Implement SameSite cookies_
+- - Weak Passwords
+  - **🟡 Medium**
+  - **Enforce password policies**\
+    _Minimum 12 characters, complexity requirements_
+- - Missing HTTPS
+  - **🟠 High**
+  - **Always use TLS/SSL**\
+    _Redirect HTTP to HTTPS_
+</ListTable>
+
+## Links and References
+
+<ListTable headerRows={1} caption="Documentation Resources">
+- - Technology
+  - Official Docs
+  - Community
+- - React
+  - [react.dev](https://react.dev)
+  - [r/reactjs](https://reddit.com/r/reactjs)
+- - TypeScript
+  - [typescriptlang.org](https://www.typescriptlang.org)
+  - [TS Community Discord](https://discord.gg/typescript)
+- - MDX
+  - [mdxjs.com](https://mdxjs.com)
+  - [GitHub Discussions](https://github.com/mdx-js/mdx/discussions)
+- - Docusaurus
+  - [docusaurus.io](https://docusaurus.io)
+  - [Discord Server](https://discord.gg/docusaurus)
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="JavaScript Methods">
+- - Method
+  - Syntax
+  - Returns
+  - Description
+- - Array.map()
+  - `array.map(callback)`
+  - `Array`
+  - Creates new array with results of calling function on every element
+...
+</ListTable>
+```

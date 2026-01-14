@@ -1,0 +1,312 @@
+---
+sidebar_position: 2
+---
+
+# Comparison Matrices
+
+Technical comparison tables for products, frameworks, and tools.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Framework Comparison
+
+<ListTable headerRows={1} headerColumns={1} caption="Frontend Framework Comparison">
+- - Feature
+  - React
+  - Vue
+  - Svelte
+  - Angular
+- - **Type**
+  - Library
+  - Framework
+  - Compiler
+  - Framework
+- - **Language**
+  - JavaScript/TypeScript
+  - JavaScript/TypeScript
+  - JavaScript/TypeScript
+  - TypeScript
+- - **Learning Curve**
+  - Medium
+  - Easy
+  - Easy
+  - Steep
+- - **Bundle Size (min)**
+  - ~40 KB
+  - ~20 KB
+  - ~2 KB
+  - ~60 KB
+- - **Virtual DOM**
+  - ✅ Yes
+  - ✅ Yes
+  - ❌ No (compiler)
+  - ✅ Yes
+- - **State Management**
+  - External (Redux, Zustand)
+  - Vuex / Pinia
+  - Built-in stores
+  - RxJS / NgRx
+- - **Templating**
+  - JSX
+  - SFC Templates
+  - SFC Templates
+  - Templates
+- - **Mobile Support**
+  - React Native
+  - Vue Native
+  - Svelte Native
+  - Ionic / NativeScript
+- - **Community Size**
+  - ⭐⭐⭐⭐⭐
+  - ⭐⭐⭐⭐
+  - ⭐⭐⭐
+  - ⭐⭐⭐⭐
+- - **Company Backing**
+  - Meta
+  - Community
+  - Community
+  - Google
+</ListTable>
+
+## Database Comparison
+
+<ListTable headerRows={2} headerColumns={1} caption="Database Technology Comparison">
+- - [r2] Characteristic
+  - [c2] SQL Databases
+  - [c2] NoSQL Databases
+- - _
+  - PostgreSQL
+  - MySQL
+  - MongoDB
+  - Redis
+- - **Data Model**
+  - Relational
+  - Relational
+  - Document
+  - Key-Value
+- - **Schema**
+  - Fixed
+  - Fixed
+  - Flexible
+  - Schemaless
+- - **Transactions**
+  - ACID
+  - ACID
+  - Limited
+  - Limited
+- - **Scalability**
+  - Vertical
+  - Vertical
+  - Horizontal
+  - Horizontal
+- - **Query Language**
+  - SQL
+  - SQL
+  - MQL
+  - Commands
+- - **Best Use Case**
+  - Complex queries
+  - Web applications
+  - Flexible data
+  - Caching
+- - **Max Performance**
+  - High
+  - High
+  - Very High
+  - Extremely High
+- - **Data Consistency**
+  - Strong
+  - Strong
+  - Eventual
+  - Eventual
+- - **JSON Support**
+  - ✅ Native
+  - ✅ Limited
+  - ✅ Native
+  - ✅ Native
+- - **Full-Text Search**
+  - ✅ Built-in
+  - ✅ Limited
+  - ✅ Atlas Search
+  - ❌ Requires RediSearch
+</ListTable>
+
+## Cloud Provider Comparison
+
+<ListTable headerRows={2} caption="Cloud Services Comparison (2024)">
+- - [r2] Service Category
+  - [c3] Provider
+- - _
+  - AWS
+  - Azure
+  - GCP
+- - **Compute**
+  - EC2, Lambda, ECS
+  - Virtual Machines, Functions, Container Instances
+  - Compute Engine, Cloud Functions, Cloud Run
+- - **Storage**
+  - S3, EBS, EFS
+  - Blob Storage, Disk Storage, Files
+  - Cloud Storage, Persistent Disk, Filestore
+- - **Database**
+  - RDS, DynamoDB, Aurora
+  - SQL Database, Cosmos DB
+  - Cloud SQL, Firestore, Spanner
+- - **Networking**
+  - VPC, Route 53, CloudFront
+  - Virtual Network, DNS, CDN
+  - VPC, Cloud DNS, Cloud CDN
+- - **AI/ML**
+  - SageMaker, Rekognition
+  - Machine Learning, Cognitive Services
+  - Vertex AI, Vision AI
+- - **Containers**
+  - EKS, ECS, Fargate
+  - AKS, Container Instances
+  - GKE, Cloud Run
+- - **Serverless**
+  - Lambda, API Gateway
+  - Functions, Logic Apps
+  - Cloud Functions, Cloud Run
+- - **Pricing Model**
+  - Pay-as-you-go
+  - Pay-as-you-go
+  - Pay-as-you-go
+- - **Free Tier**
+  - 12 months + always free
+  - 12 months + always free
+  - 90 days + always free
+- - **Global Regions**
+  - 30+
+  - 60+
+  - 35+
+</ListTable>
+
+## CI/CD Platform Comparison
+
+<ListTable headerRows={1} caption="Continuous Integration Platform Features">
+- - Feature
+  - GitHub Actions
+  - GitLab CI
+  - CircleCI
+  - Jenkins
+- - **Hosting**
+  - Cloud / Self-hosted
+  - Cloud / Self-hosted
+  - Cloud / Self-hosted
+  - Self-hosted
+- - **Free Tier**
+  - 2,000 min/month
+  - 400 min/month
+  - 6,000 min/month
+  - Unlimited (self-hosted)
+- - **Configuration**
+  - YAML
+  - YAML
+  - YAML
+  - Groovy DSL / YAML
+- - **Docker Support**
+  - ✅ Native
+  - ✅ Native
+  - ✅ Native
+  - ✅ Via plugins
+- - **Parallel Jobs**
+  - ✅ Yes
+  - ✅ Yes
+  - ✅ Yes
+  - ✅ Yes
+- - **Caching**
+  - ✅ Built-in
+  - ✅ Built-in
+  - ✅ Built-in
+  - ✅ Via plugins
+- - **Matrix Builds**
+  - ✅ Yes
+  - ✅ Yes
+  - ✅ Yes
+  - ✅ Yes
+- - **Secrets Management**
+  - ✅ Encrypted
+  - ✅ Encrypted
+  - ✅ Encrypted
+  - ✅ Via plugins
+- - **macOS Runners**
+  - ✅ Yes
+  - ✅ Yes (SaaS)
+  - ✅ Yes
+  - ❌ DIY
+- - **Windows Runners**
+  - ✅ Yes
+  - ✅ Yes
+  - ✅ Yes
+  - ✅ Yes
+- - **Learning Curve**
+  - Easy
+  - Easy
+  - Medium
+  - Steep
+- - **Marketplace/Plugins**
+  - ✅ Large
+  - ✅ Medium
+  - ✅ Medium
+  - ✅ Very Large
+</ListTable>
+
+## Programming Language Comparison
+
+<ListTable headerRows={1} caption="Backend Language Trade-offs">
+- - Language
+  - Performance
+  - Learning Curve
+  - Ecosystem
+  - Use Cases
+  - Popular Frameworks
+- - **Python**
+  - Medium
+  - Easy
+  - Excellent
+  - Data science, AI/ML, Web, Automation
+  - Django, Flask, FastAPI
+- - **JavaScript/Node.js**
+  - Medium-High
+  - Easy
+  - Excellent
+  - Full-stack web, Real-time apps, APIs
+  - Express, NestJS, Fastify
+- - **Go**
+  - Very High
+  - Medium
+  - Good
+  - Microservices, Cloud, CLIs, Systems
+  - Gin, Echo, Fiber
+- - **Rust**
+  - Extremely High
+  - Steep
+  - Growing
+  - Systems, WebAssembly, Performance-critical
+  - Actix, Rocket, Axum
+- - **Java**
+  - High
+  - Medium
+  - Excellent
+  - Enterprise, Android, Large systems
+  - Spring, Quarkus, Micronaut
+- - **C#**
+  - High
+  - Medium
+  - Excellent
+  - Enterprise, Games (Unity), Windows apps
+  - ASP.NET Core, Blazor
+- - **Ruby**
+  - Medium
+  - Easy
+  - Good
+  - Web apps, Automation, Startups
+  - Ruby on Rails, Sinatra
+- - **PHP**
+  - Medium
+  - Easy
+  - Good
+  - Web development, WordPress, APIs
+  - Laravel, Symfony, Slim
+</ListTable>

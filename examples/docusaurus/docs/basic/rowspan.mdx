@@ -1,0 +1,163 @@
+---
+sidebar_position: 2
+---
+
+# Rowspan Examples
+
+Use `[r2]`, `[r3]`, etc. to make cells span multiple rows. Use `_` as a placeholder in subsequent rows.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Simple Rowspan
+
+<ListTable headerRows={1} caption="Products with Categories">
+- - Category
+  - Product
+  - Price
+- - [r2] Electronics
+  - Laptop
+  - $999
+- - _
+  - Mouse
+  - $29
+- - [r2] Books
+  - Fiction Novel
+  - $15
+- - _
+  - Technical Manual
+  - $45
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Products with Categories">
+- - Category
+  - Product
+  - Price
+- - [r2] Electronics
+  - Laptop
+  - $999
+- - _
+  - Mouse
+  - $29
+- - [r2] Books
+  - Fiction Novel
+  - $15
+- - _
+  - Technical Manual
+  - $45
+</ListTable>
+```
+
+**Key Points:**
+- `[r2]` in the "Electronics" cell makes it span 2 rows
+- The second row uses `_` as a placeholder for the Category column
+- The cell content is "Electronics" (without the `[r2]` prefix in the output)
+
+## Multiple Rowspans
+
+Multiple columns can have rowspans independently:
+
+<ListTable headerRows={1} caption="Team Schedule">
+- - Team
+  - Member
+  - Task
+  - Hours
+- - [r3] Frontend
+  - Alice
+  - [r2] UI Components
+  - 8
+- - _
+  - Bob
+  - _
+  - 6
+- - _
+  - Carol
+  - Testing
+  - 4
+- - [r2] Backend
+  - Dave
+  - API Development
+  - 10
+- - _
+  - Eve
+  - Database
+  - 8
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Team Schedule">
+- - Team
+  - Member
+  - Task
+  - Hours
+- - [r3] Frontend
+  - Alice
+  - [r2] UI Components
+  - 8
+- - _
+  - Bob
+  - _
+  - 6
+- - _
+  - Carol
+  - Testing
+  - 4
+- - [r2] Backend
+  - Dave
+  - API Development
+  - 10
+- - _
+  - Eve
+  - Database
+  - 8
+</ListTable>
+```
+
+## Large Rowspan
+
+<ListTable headerRows={1} caption="Project Phases">
+- - Phase
+  - Week
+  - Deliverable
+- - [r4] Planning
+  - Week 1
+  - Requirements
+- - _
+  - Week 2
+  - Design Mockups
+- - _
+  - Week 3
+  - Architecture
+- - _
+  - Week 4
+  - Project Plan
+- - Implementation
+  - Week 5-12
+  - Working Product
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Project Phases">
+- - Phase
+  - Week
+  - Deliverable
+- - [r4] Planning
+  - Week 1
+  - Requirements
+- - _
+  - Week 2
+  - Design Mockups
+- - _
+  - Week 3
+  - Architecture
+- - _
+  - Week 4
+  - Project Plan
+- - Implementation
+  - Week 5-12
+  - Working Product
+</ListTable>
+```

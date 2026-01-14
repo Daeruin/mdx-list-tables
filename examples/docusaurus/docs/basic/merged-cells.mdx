@@ -1,0 +1,233 @@
+---
+sidebar_position: 4
+---
+
+# Complex Merged Cells
+
+Combine rowspan and colspan with `[r2c3]` syntax for cells that span both dimensions.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Combined Rowspan and Colspan
+
+<ListTable headerRows={2} caption="Quarterly Revenue Breakdown">
+- - [r2] Quarter
+  - [c2] Revenue
+  - [c2] Expenses
+- - _
+  - Sales
+  - Services
+  - Marketing
+  - Operations
+- - Q1
+  - $50,000
+  - $30,000
+  - $10,000
+  - $15,000
+- - Q2
+  - $60,000
+  - $35,000
+  - $12,000
+  - $18,000
+- - Q3
+  - $65,000
+  - $40,000
+  - $13,000
+  - $20,000
+- - Q4
+  - $70,000
+  - $45,000
+  - $15,000
+  - $22,000
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={2} caption="Quarterly Revenue Breakdown">
+- - [r2] Quarter
+  - [c2] Revenue
+  - [c2] Expenses
+- - _
+  - Sales
+  - Services
+  - Marketing
+  - Operations
+...
+</ListTable>
+```
+
+## Large Merged Cell
+
+<ListTable caption="Project Status Dashboard">
+- - [r2c2] PROJECT ALPHA
+  - _
+  - Status
+  - Progress
+- - _
+  - _
+  - Active
+  - 75%
+- - Phase
+  - Task
+  - Owner
+  - Due Date
+- - Development
+  - Backend API
+  - Alice
+  - 2024-02-15
+- - Development
+  - Frontend UI
+  - Bob
+  - 2024-02-20
+- - Testing
+  - QA Testing
+  - Carol
+  - 2024-02-25
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable caption="Project Status Dashboard">
+- - [r2c2] PROJECT ALPHA
+  - _
+  - Status
+  - Progress
+- - _
+  - _
+  - Active
+  - 75%
+...
+</ListTable>
+```
+
+## Complex Header Structure
+
+<ListTable headerRows={3} headerColumns={1} caption="Sales Performance Matrix">
+- - [r3] Region
+  - [c6] 2024 Sales Data
+- - _
+  - [c2] Q1
+  - [c2] Q2
+  - [c2] Q3
+- - _
+  - Products
+  - Services
+  - Products
+  - Services
+  - Products
+  - Services
+- - North
+  - $50k
+  - $30k
+  - $55k
+  - $35k
+  - $60k
+  - $40k
+- - South
+  - $45k
+  - $25k
+  - $50k
+  - $30k
+  - $55k
+  - $35k
+- - East
+  - $60k
+  - $35k
+  - $65k
+  - $40k
+  - $70k
+  - $45k
+- - West
+  - $55k
+  - $40k
+  - $60k
+  - $45k
+  - $65k
+  - $50k
+</ListTable>
+
+## Mixed Patterns
+
+<ListTable headerRows={2} caption="Complex Scheduling Table">
+- - [r2] Day
+  - [c2] Morning
+  - _
+  - [c2] Afternoon
+  - _
+- - _
+  - Room A
+  - Room B
+  - Room A
+  - Room B
+- - [r2] Monday
+  - Meeting
+  - [r2] Workshop
+  - Training
+  - Review
+- - _
+  - Presentation
+  - _
+  - Planning
+  - Demo
+- - Tuesday
+  - [c2] Team Building
+  - _
+  - [c2] Conference
+  - _
+- - Wednesday
+  - Review
+  - Meeting
+  - [r2c2] All-Hands
+  - _
+- - Thursday
+  - Planning
+  - Demo
+  - _
+  - _
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={2} caption="Complex Scheduling Table">
+- - [r2] Day
+  - [c2] Morning
+  - _
+  - [c2] Afternoon
+  - _
+- - _
+  - Room A
+  - Room B
+  - Room A
+  - Room B
+- - [r2] Monday
+  - Meeting
+  - [r2] Workshop
+  - Training
+  - Review
+- - _
+  - Presentation
+  - _
+  - Planning
+  - Demo
+- - Tuesday
+  - [c2] Team Building
+  - _
+  - [c2] Conference
+  - _
+- - Wednesday
+  - Review
+  - Meeting
+  - [r2c2] All-Hands
+  - _
+- - Thursday
+  - Planning
+  - Demo
+  - _
+  - _
+</ListTable>
+```
+
+Notice how placeholders (`_`) are used strategically:
+- For cells occupied by rowspans from above
+- For cells occupied by colspans from the left
+- The component automatically handles the grid positioning

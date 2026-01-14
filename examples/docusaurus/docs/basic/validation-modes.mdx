@@ -1,0 +1,215 @@
+---
+sidebar_position: 5
+---
+
+# Validation Modes
+
+The `validation` prop controls how strictly the component checks for proper placeholder usage and table structure.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Validation Levels
+
+The ListTable component supports three validation modes:
+
+- **`'strict'`** - Tables with structural issues will show an error instead of rendering
+- **`'warn'`** (default) - Tables render normally but log warnings to the console
+- **`'off'`** - No validation, allows flexible syntax without placeholders
+
+## Strict Mode
+
+In strict mode, tables with structural issues will show an error message instead of rendering. This is useful during development to catch mistakes early.
+
+<ListTable headerRows={1} validation="strict" caption="Strict Validation Example">
+- - Name
+  - [c2] Info
+  - _
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+- - Bob
+  - bob@example.com
+  - 555-0200
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} validation="strict" caption="Strict Validation Example">
+- - Name
+  - [c2] Info
+  - _
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+- - Bob
+  - bob@example.com
+  - 555-0200
+</ListTable>
+```
+
+In this example, the table has proper structure with all required placeholders, so it renders successfully even in strict mode.
+
+## Warn Mode (Default)
+
+Warn mode is the default validation level. Tables will render normally, but structural issues are logged to the browser console. This is the recommended setting for production.
+
+<ListTable headerRows={1} caption="Warn Mode Example">
+- - Name
+  - [c2] Info
+  - _
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Warn Mode Example">
+- - Name
+  - [c2] Info
+  - _
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+</ListTable>
+```
+
+Check the browser console to see any validation warnings. Even if there are issues, the table will attempt to render.
+
+## Off Mode
+
+With validation turned off, you can use more flexible syntax. This is useful when you want simpler markdown without worrying about exact placeholder placement.
+
+<ListTable headerRows={1} validation="off" caption="Flexible Syntax">
+- - Name
+  - [c2] Contact Info
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+- - Bob
+  - bob@example.com
+  - 555-0200
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} validation="off" caption="Flexible Syntax">
+- - Name
+  - [c2] Contact Info
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+- - Bob
+  - bob@example.com
+  - 555-0200
+</ListTable>
+```
+
+Notice how in "off" mode, we didn't need to add the trailing placeholder `_` after `[c2] Contact Info` in the first row. The component is more forgiving about placeholder placement.
+
+## Comparison Example
+
+Here's the same table structure rendered with all three validation modes:
+
+### Strict Mode
+<ListTable headerRows={1} validation="strict" caption="Team Contact List (Strict)">
+- - Team
+  - [c2] Contact Methods
+  - _
+- - _
+  - Email
+  - Phone
+- - Engineering
+  - eng@company.com
+  - ext. 100
+- - Design
+  - design@company.com
+  - ext. 200
+</ListTable>
+
+### Warn Mode
+<ListTable headerRows={1} caption="Team Contact List (Warn)">
+- - Team
+  - [c2] Contact Methods
+  - _
+- - _
+  - Email
+  - Phone
+- - Engineering
+  - eng@company.com
+  - ext. 100
+- - Design
+  - design@company.com
+  - ext. 200
+</ListTable>
+
+### Off Mode
+<ListTable headerRows={1} validation="off" caption="Team Contact List (Off)">
+- - Team
+  - [c2] Contact Methods
+- - _
+  - Email
+  - Phone
+- - Engineering
+  - eng@company.com
+  - ext. 100
+- - Design
+  - design@company.com
+  - ext. 200
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} validation="strict" caption="Team Contact List (Strict)">
+- - Team
+  - [c2] Contact Methods
+  - _
+- - _
+  - Email
+  - Phone
+...
+</ListTable>
+
+<ListTable headerRows={1} caption="Team Contact List (Warn)">
+- - Team
+  - [c2] Contact Methods
+  - _
+- - _
+  - Email
+  - Phone
+...
+</ListTable>
+
+<ListTable headerRows={1} validation="off" caption="Team Contact List (Off)">
+- - Team
+  - [c2] Contact Methods
+- - _
+  - Email
+  - Phone
+...
+</ListTable>
+```
+
+## When to Use Each Mode
+
+- **Strict**: Use during development to catch structural errors early. Best for ensuring table correctness before deployment.
+- **Warn**: Use in production. Provides helpful debugging information without breaking the page.
+- **Off**: Use when you prioritize authoring simplicity over strict validation, or when working with dynamically generated content where placeholder management is difficult.

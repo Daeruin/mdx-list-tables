@@ -1,0 +1,189 @@
+---
+sidebar_position: 1
+---
+
+# Simple Tables
+
+The most basic usage of ListTable creates a standard table from nested lists.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Basic Table with Headers
+
+<ListTable headerRows={1} caption="Employee Directory">
+- - Name
+  - Department
+  - Location
+- - Alice Johnson
+  - Engineering
+  - San Francisco
+- - Bob Smith
+  - Design
+  - New York
+- - Carol White
+  - Marketing
+  - Austin
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} caption="Employee Directory">
+- - Name
+  - Department
+  - Location
+- - Alice Johnson
+  - Engineering
+  - San Francisco
+- - Bob Smith
+  - Design
+  - New York
+- - Carol White
+  - Marketing
+  - Austin
+</ListTable>
+```
+
+## Table with Header and Footer
+
+<ListTable headerRows={1} footerRows={1} caption="Monthly Sales">
+- - Month
+  - Revenue
+  - Expenses
+- - January
+  - $10,000
+  - $7,000
+- - February
+  - $12,000
+  - $8,000
+- - March
+  - $11,000
+  - $7,500
+- - Total
+  - $33,000
+  - $22,500
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} footerRows={1} caption="Monthly Sales">
+- - Month
+  - Revenue
+  - Expenses
+- - January
+  - $10,000
+  - $7,000
+- - February
+  - $12,000
+  - $8,000
+- - March
+  - $11,000
+  - $7,500
+- - Total
+  - $33,000
+  - $22,500
+</ListTable>
+```
+
+## No Headers
+
+Tables don't require headers:
+
+<ListTable caption="Simple Data">
+- - A1
+  - B1
+  - C1
+- - A2
+  - B2
+  - C2
+- - A3
+  - B3
+  - C3
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable caption="Simple Data">
+- - A1
+  - B1
+  - C1
+- - A2
+  - B2
+  - C2
+- - A3
+  - B3
+  - C3
+</ListTable>
+```
+
+## Multiple Header Rows and Column Headers
+
+You can combine `headerRows` and `headerColumns` for complex table structures:
+
+<ListTable headerRows={2} headerColumns={1} caption="Regional Sales Data">
+- - [r2] Region
+  - [c2] Q1 2024
+  - _
+  - [c2] Q2 2024
+  - _
+- - _
+  - Sales
+  - Growth
+  - Sales
+  - Growth
+- - North
+  - $120K
+  - +15%
+  - $138K
+  - +18%
+- - South
+  - $95K
+  - +8%
+  - $103K
+  - +12%
+- - East
+  - $156K
+  - +22%
+  - $187K
+  - +20%
+- - West
+  - $142K
+  - +12%
+  - $159K
+  - +15%
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={2} headerColumns={1} caption="Regional Sales Data">
+- - [r2] Region
+  - [c2] Q1 2024
+  - _
+  - [c2] Q2 2024
+  - _
+- - _
+  - Sales
+  - Growth
+  - Sales
+  - Growth
+- - North
+  - $120K
+  - +15%
+  - $138K
+  - +18%
+- - South
+  - $95K
+  - +8%
+  - $103K
+  - +12%
+- - East
+  - $156K
+  - +22%
+  - $187K
+  - +20%
+- - West
+  - $142K
+  - +12%
+  - $159K
+  - +15%
+</ListTable>
+```

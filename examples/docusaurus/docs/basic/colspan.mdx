@@ -1,0 +1,207 @@
+---
+sidebar_position: 3
+---
+
+# Colspan Examples
+
+Use `[c2]`, `[c3]`, etc. to make cells span multiple columns.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Simple Colspan
+
+<ListTable headerRows={2} caption="Sales by Region">
+- - [r2] Region
+  - [c2] Q1 Sales
+  - _
+- - _
+  - Products
+  - Services
+- - North
+  - $50,000
+  - $30,000
+- - South
+  - $45,000
+  - $25,000
+- - East
+  - $60,000
+  - $35,000
+- - West
+  - $55,000
+  - $40,000
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={2} caption="Sales by Region">
+- - [r2] Region
+  - [c2] Q1 Sales
+  - _
+- - _
+  - Products
+  - Services
+- - North
+  - $50,000
+  - $30,000
+- - South
+  - $45,000
+  - $25,000
+- - East
+  - $60,000
+  - $35,000
+- - West
+  - $55,000
+  - $40,000
+</ListTable>
+```
+
+**Key Points:**
+- `[c2]` makes "Q1 Sales" span 2 columns
+- In the header row with the colspan, we need a placeholder `_` after the colspan
+- The second header row has a placeholder `_` for the Region column, then Products and Services
+
+## Multiple Headers
+
+<ListTable headerRows={2} caption="Quarterly Performance">
+- - [c4] 2024 Performance Report
+- - Quarter
+  - Revenue
+  - Expenses
+  - Profit
+- - Q1
+  - $100,000
+  - $60,000
+  - $40,000
+- - Q2
+  - $120,000
+  - $70,000
+  - $50,000
+- - Q3
+  - $130,000
+  - $75,000
+  - $55,000
+- - Q4
+  - $150,000
+  - $85,000
+  - $65,000
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={2} caption="Quarterly Performance">
+- - [c4] 2024 Performance Report
+- - Quarter
+  - Revenue
+  - Expenses
+  - Profit
+...
+</ListTable>
+```
+
+## Mixed Colspan Widths
+
+<ListTable headerRows={2} caption="Product Comparison">
+- - [r2] Feature
+  - [c2] Basic Plan
+  - _
+  - [c3] Enterprise Plan
+  - _
+  - _
+- - _
+  - Mobile
+  - Desktop
+  - Mobile
+  - Desktop
+  - API
+- - Storage
+  - 10 GB
+  - 50 GB
+  - Unlimited
+  - Unlimited
+  - Unlimited
+- - Users
+  - 1
+  - 5
+  - Unlimited
+  - Unlimited
+  - Unlimited
+- - Support
+  - Email
+  - Email
+  - Phone
+  - Phone
+  - Dedicated
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={2} caption="Product Comparison">
+- - [r2] Feature
+  - [c2] Basic Plan
+  - _
+  - [c3] Enterprise Plan
+  - _
+  - _
+- - _
+  - Mobile
+  - Desktop
+  - Mobile
+  - Desktop
+  - API
+- - Storage
+  - 10 GB
+  - 50 GB
+  - Unlimited
+  - Unlimited
+  - Unlimited
+- - Users
+  - 1
+  - 5
+  - Unlimited
+  - Unlimited
+  - Unlimited
+- - Support
+  - Email
+  - Email
+  - Phone
+  - Phone
+  - Dedicated
+</ListTable>
+```
+
+## Footer with Colspan
+
+<ListTable headerRows={1} footerRows={1} caption="Invoice Items">
+- - Item
+  - Quantity
+  - Price
+  - Total
+- - Widget A
+  - 10
+  - $5.00
+  - $50.00
+- - Widget B
+  - 5
+  - $10.00
+  - $50.00
+- - Widget C
+  - 3
+  - $15.00
+  - $45.00
+- - [c3] Grand Total
+  - _
+  - _
+  - $145.00
+</ListTable>
+
+**MDX Source:**
+```mdx
+<ListTable headerRows={1} footerRows={1} caption="Invoice Items">
+...
+- - [c3] Grand Total
+  - _
+  - _
+  - $145.00
+</ListTable>
+```
+

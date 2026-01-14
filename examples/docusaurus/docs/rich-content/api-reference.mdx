@@ -1,0 +1,196 @@
+---
+sidebar_position: 3
+---
+
+# API Reference Tables
+
+Complex API documentation tables with detailed type information and examples.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## REST API Endpoints
+
+<ListTable headerRows={2} headerColumns={1} caption="User Management API v2.0">
+- - [r2] Resource
+  - [c3] Operations
+- - _
+  - Method
+  - Endpoint
+  - Description
+- - [r3] Users
+  - GET
+  - `/api/v2/users`
+  - List all users with pagination
+- - _
+  - GET
+  - `/api/v2/users/:id`
+  - Get user by ID
+- - _
+  - POST
+  - `/api/v2/users`
+  - Create new user
+- - [r2] Authentication
+  - POST
+  - `/api/v2/auth/login`
+  - Authenticate user and get token
+- - _
+  - POST
+  - `/api/v2/auth/refresh`
+  - Refresh authentication token
+- - [r2] Organizations
+  - GET
+  - `/api/v2/orgs`
+  - List user's organizations
+- - _
+  - POST
+  - `/api/v2/orgs`
+  - Create new organization
+</ListTable>
+
+## Component Props API
+
+<ListTable headerRows={1} headerColumns={1} caption="ListTable Component Props">
+- - Prop
+  - Type
+  - Default
+  - Description
+- - children
+  - `ReactElement`
+  - **required**
+  - MDX list structure representing the table
+- - headerRows
+  - `number`
+  - `0`
+  - Number of rows to render in `<thead>`
+- - headerColumns
+  - `number`
+  - `0`
+  - Number of columns to render as `<th>` (for row headers)
+- - footerRows
+  - `number`
+  - `0`
+  - Number of rows from bottom to render in `<tfoot>`
+- - className
+  - `string`
+  - `""`
+  - Additional CSS classes for the `<table>` element
+- - caption
+  - `string`
+  - `undefined`
+  - Table caption rendered in `<caption>` element
+- - validation
+  - `'strict' \| 'warn' \| 'off'`
+  - `'warn'`
+  - Validation mode for table structure
+</ListTable>
+
+## Type Definitions
+
+<ListTable headerRows={1} caption="Core Type Definitions">
+- - Type
+  - Definition
+  - Usage
+- - `CellData`
+  - ```ts<br/>interface CellData &#123;<br/>&nbsp;&nbsp;content: ReactNode;<br/>&nbsp;&nbsp;rowSpan: number;<br/>&nbsp;&nbsp;colSpan: number;<br/>&nbsp;&nbsp;isPlaceholder: boolean;<br/>&#125;```
+  - Internal cell representation
+- - `ValidationError`
+  - ```ts<br/>interface ValidationError &#123;<br/>&nbsp;&nbsp;type: 'error' \| 'warning';<br/>&nbsp;&nbsp;message: string;<br/>&nbsp;&nbsp;row?: number;<br/>&nbsp;&nbsp;col?: number;<br/>&#125;```
+  - Validation error object
+- - `ListTableProps`
+  - ```ts<br/>interface ListTableProps &#123;<br/>&nbsp;&nbsp;children: ReactElement;<br/>&nbsp;&nbsp;headerRows?: number;<br/>&nbsp;&nbsp;footerRows?: number;<br/>&nbsp;&nbsp;className?: string;<br/>&nbsp;&nbsp;caption?: string;<br/>&nbsp;&nbsp;validation?: Mode;<br/>&#125;```
+  - Component props interface
+</ListTable>
+
+## HTTP Response Codes
+
+<ListTable headerRows={2} caption="API Response Status Codes">
+- - [c2] Code
+  - _
+  - [r2] Description
+  - [r2] Common Scenarios
+- - Category
+  - Status
+  - _
+  - _
+- - [r3] Success (2xx)
+  - 200 OK
+  - Request successful
+  - GET, PUT successful operations
+- - _
+  - 201 Created
+  - Resource created
+  - POST successful creation
+- - _
+  - 204 No Content
+  - Successful, no response body
+  - DELETE successful
+- - [r4] Client Error (4xx)
+  - 400 Bad Request
+  - Invalid request format
+  - Validation errors, malformed JSON
+- - _
+  - 401 Unauthorized
+  - Authentication required
+  - Missing or invalid token
+- - _
+  - 403 Forbidden
+  - Insufficient permissions
+  - User lacks required role/scope
+- - _
+  - 404 Not Found
+  - Resource doesn't exist
+  - Invalid ID, deleted resource
+- - [r3] Server Error (5xx)
+  - 500 Internal Server Error
+  - Unexpected server error
+  - Unhandled exceptions, bugs
+- - _
+  - 502 Bad Gateway
+  - Upstream service error
+  - Database connection failed
+- - _
+  - 503 Service Unavailable
+  - Service temporarily down
+  - Maintenance mode, overloaded
+</ListTable>
+
+## Database Schema
+
+<ListTable headerRows={1} headerColumns={1} caption="Users Table Schema">
+- - Column
+  - Type
+  - Constraints
+  - Description
+- - id
+  - `UUID`
+  - PRIMARY KEY, NOT NULL
+  - Unique user identifier
+- - email
+  - `VARCHAR(255)`
+  - UNIQUE, NOT NULL
+  - User email address
+- - password_hash
+  - `VARCHAR(255)`
+  - NOT NULL
+  - Bcrypt hashed password
+- - name
+  - `VARCHAR(100)`
+  - NOT NULL
+  - User's full name
+- - created_at
+  - `TIMESTAMP`
+  - NOT NULL, DEFAULT NOW()
+  - Account creation timestamp
+- - updated_at
+  - `TIMESTAMP`
+  - NOT NULL, DEFAULT NOW()
+  - Last update timestamp
+- - is_active
+  - `BOOLEAN`
+  - NOT NULL, DEFAULT TRUE
+  - Account active status
+- - role
+  - `ENUM`
+  - NOT NULL, DEFAULT 'user'
+  - User role: 'admin', 'user', 'guest'
+</ListTable>

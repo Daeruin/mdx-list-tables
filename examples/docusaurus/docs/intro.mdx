@@ -1,0 +1,63 @@
+---
+sidebar_position: 1
+slug: /
+---
+
+# ListTable Component Examples
+
+Welcome to the **ListTable** component examples! This component allows you to create complex HTML tables with merged cells using simple Markdown list syntax.
+
+## Why ListTable?
+
+Traditional Markdown doesn't support `rowspan` or `colspan` attributes. The ListTable component bridges this gap by using special syntax in list items:
+
+- `[r2]` - Creates a rowspan of 2
+- `[c3]` - Creates a colspan of 3
+- `[r2c3]` - Combines both (rowspan=2, colspan=3)
+- `_` - Placeholder for cells occupied by spans from above
+
+## Quick Example
+
+Here's a simple table with a rowspan:
+
+import { ListTable } from '@site/src/components/ListTable';
+
+<ListTable headerRows={1} caption="Simple Rowspan Example">
+- - Name
+  - Role
+- - [r2] Alice
+  - Developer
+- - _
+  - Designer
+- - Bob
+  - Manager
+</ListTable>
+
+## Browse the Examples
+
+Use the sidebar to explore different examples:
+
+- **Basic Examples** - Learn the fundamentals of rowspan, colspan, and merged cells
+- **Rich Content** - See how to use formatted text, code, and complex content in cells
+- **Real World Examples** - Practical tables like pricing matrices and API references
+
+## Installation
+
+```bash
+npm install mdx-list-tables
+```
+
+Then import and use in your MDX files:
+
+```mdx
+import { ListTable } from 'mdx-list-tables';
+
+<ListTable headerRows={1}>
+- - Header 1
+  - Header 2
+- - Cell A1
+  - Cell A2
+- - Cell B1
+  - Cell B2
+</ListTable>
+```

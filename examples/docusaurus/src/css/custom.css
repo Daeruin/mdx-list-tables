@@ -1,0 +1,49 @@
+/**
+ * Custom styles for ListTable examples
+ */
+
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-code-font-size: 95%;
+}
+
+/* Style tables nicely */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+th, td {
+  border: 1px solid var(--ifm-table-border-color);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th {
+  background-color: var(--ifm-table-head-background);
+  font-weight: 600;
+}
+
+caption {
+  caption-side: top;
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: 1.1em;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+/* Highlight code in tables */
+table code {
+  background-color: var(--ifm-code-background);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* Footer styling */
+tfoot {
+  font-weight: 600;
+  background-color: var(--ifm-table-head-background);
+}
