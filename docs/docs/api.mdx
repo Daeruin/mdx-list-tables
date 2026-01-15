@@ -117,6 +117,26 @@ Validation mode for table structure:
 </ListTable>
 ```
 
+### id
+
+**Type**: `string`
+**Default**: `undefined`
+
+Optional identifier for debugging purposes. When validation errors occur, the `id` appears in console messages to help identify which table has issues.
+
+```mdx
+<ListTable id="pricing-comparison">
+- - Feature
+  - Price
+- - Basic
+  - $10
+</ListTable>
+```
+
+Console output: `[ListTable id="pricing-comparison"] error: ...`
+
+Note: If both `id` and `caption` are provided, `id` takes precedence in error messages.
+
 ## Merged Cell Syntax
 
 ### Rowspan Marker

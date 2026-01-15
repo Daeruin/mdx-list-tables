@@ -515,13 +515,31 @@ If you're still stuck:
 
 ## Debugging Tips
 
+### Identify Tables with Errors
+
+When building your site, validation errors appear in the console. To identify which table has errors:
+
+1. **Use captions** - Error messages include the caption automatically:
+   ```mdx
+   <ListTable caption="My Problem Table">
+   ```
+   Console shows: `[ListTable caption="My Problem Table"] error: ...`
+
+2. **Add an `id` prop** for debugging - Useful when you don't want a visible caption:
+   ```mdx
+   <ListTable id="pricing-table-v2">
+   ```
+   Console shows: `[ListTable id="pricing-table-v2"] error: ...`
+
+3. **Search for the caption/id** - Use your editor to find the table by its identifier
+
 ### Enable Strict Validation
 
-Set `validation="strict"` to see errors directly in the rendered output:
+Set `validation="strict"` to see errors directly in the rendered output instead of console warnings:
 
 ```mdx
 <ListTable validation="strict">
-<!-- Errors show instead of table -->
+<!-- Errors show in the page instead of table -->
 </ListTable>
 ```
 

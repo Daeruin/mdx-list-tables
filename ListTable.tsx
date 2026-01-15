@@ -9,6 +9,7 @@ interface ListTableProps {
   className?: string;
   caption?: ReactNode;
   validation?: 'strict' | 'warn' | 'off';
+  id?: string; // Optional identifier for debugging purposes
 }
 
 interface CellData {
@@ -256,7 +257,8 @@ export const ListTable = ({
   footerRows = 0,
   className = "",
   caption,
-  validation = 'warn'
+  validation = 'warn',
+  id
 }: ListTableProps) => {
 
   // 1. Flatten the MDX structure into a 2D Array
@@ -314,8 +316,16 @@ export const ListTable = ({
   }
 
   if (validationResult.errors.length > 0 && validation === 'warn') {
+    // Build table identifier for error messages
+    const tableIdentifier = id
+      ? `id="${id}"`
+      : caption
+        ? `caption="${typeof caption === 'string' ? caption : '[complex caption]'}"`
+        : 'table';
+
     validationResult.errors.forEach(err => {
-      console.warn(`[ListTable] ${err.type}: ${err.message}`, err.row !== undefined ? `Row ${err.row}` : '');
+      const location = err.row !== undefined ? ` Row ${err.row}` : '';
+      console.warn(`[ListTable ${tableIdentifier}] ${err.type}: ${err.message}${location}`);
     });
   }
 
