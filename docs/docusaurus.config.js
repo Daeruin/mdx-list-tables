@@ -4,7 +4,7 @@
 const config = {
   title: 'MDX List Tables',
   tagline: 'Create tables with merged cells using intuitive list syntax',
-  url: 'https://yourusername.github.io',
+  url: 'https://daeruin.github.io',
   baseUrl: '/mdx-list-tables/',
   onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -15,8 +15,8 @@ const config = {
     },
   },
 
-  organizationName: 'mdx-list-tables',
-  projectName: 'docusaurus-examples',
+  organizationName: 'Daeruin',
+  projectName: 'mdx-list-tables',
 
   i18n: {
     defaultLocale: 'en',
@@ -53,7 +53,7 @@ const config = {
             label: 'Documentation',
           },
           {
-            href: 'https://github.com/yourusername/mdx-list-tables',
+            href: 'https://github.com/Daeruin/mdx-list-tables',
             label: 'GitHub',
             position: 'right',
           },

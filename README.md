@@ -2,7 +2,7 @@
 
 Create tables with merged cells in MDX using intuitive nested list syntax.
 
-[Documentation](https://yourusername.github.io/mdx-list-tables) | [Examples](https://yourusername.github.io/mdx-list-tables/basic/simple-table) | [GitHub](https://github.com/yourusername/mdx-list-tables)
+[Documentation](https://daeruin.github.io/mdx-list-tables) | [Examples](https://daeruin.github.io/mdx-list-tables/basic/simple-table) | [GitHub](https://github.com/Daeruin/mdx-list-tables)
 
 ## Features
 
@@ -62,7 +62,7 @@ This renders a table with:
 
 For complete documentation, API reference, and more examples:
 
-**[View Full Documentation →](https://yourusername.github.io/mdx-list-tables)**
+**[View Full Documentation →](https://daeruin.github.io/mdx-list-tables)**
 
 ## Framework Support
 
@@ -111,7 +111,7 @@ MIT - See [LICENSE](LICENSE) for details.
 
 ## Links
 
-- [Documentation](https://yourusername.github.io/mdx-list-tables)
-- [GitHub Repository](https://github.com/yourusername/mdx-list-tables)
+- [Documentation](https://daeruin.github.io/mdx-list-tables)
+- [GitHub Repository](https://github.com/Daeruin/mdx-list-tables)
 - [npm Package](https://www.npmjs.com/package/mdx-list-tables)
-- [Report Issues](https://github.com/yourusername/mdx-list-tables/issues)
+- [Report Issues](https://github.com/Daeruin/mdx-list-tables/issues)

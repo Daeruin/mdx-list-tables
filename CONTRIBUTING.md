@@ -13,7 +13,7 @@ Thank you for your interest in contributing to mdx-list-tables. This guide cover
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mdx-list-tables.git
+git clone https://github.com/Daeruin/mdx-list-tables.git
 cd mdx-list-tables
 
 # Install dependencies
@@ -389,9 +389,9 @@ npm run build
 
 ## Getting Help
 
-- Check existing [Issues](https://github.com/yourusername/mdx-list-tables/issues)
-- Review [Discussions](https://github.com/yourusername/mdx-list-tables/discussions)
-- Read the [documentation](https://yourusername.github.io/mdx-list-tables)
+- Check existing [Issues](https://github.com/Daeruin/mdx-list-tables/issues)
+- Review [Discussions](https://github.com/Daeruin/mdx-list-tables/discussions)
+- Read the [documentation](https://Daeruin.github.io/mdx-list-tables)
 
 ## Code of Conduct
 
