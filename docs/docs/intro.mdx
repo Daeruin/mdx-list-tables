@@ -3,26 +3,120 @@ sidebar_position: 1
 slug: /
 ---
 
-# ListTable Component Examples
+import { ListTable } from '@site/src/components/ListTable';
 
-Welcome to the **ListTable** component examples! This component allows you to create complex HTML tables with merged cells using simple Markdown list syntax.
+# ListTable component
+
+Welcome to the **ListTable** component documentation! This component allows you to create complex HTML tables with merged cells using simple Markdown list syntax.
 
 ## Why ListTable?
 
-Traditional Markdown doesn't support `rowspan` or `colspan` attributes. The ListTable component bridges this gap by using special syntax in list items:
+Traditional Markdown tables have serious drawbacks:
+
+- Multi-line content doesn't work in table cells
+- Merged cells (rowspans and colspans) aren't supported
+- Markdown tables are often tedious to create and messy to read
+
+The ListTable component addresses all of these issues, and you won't have to manually type out HTML table tags.
+
+ListTable generates accessible tables out of the box. See [Accessibility](./accessibility.mdx) for more details.
+
+## Basic syntax
+
+Create a nested list inside the `<ListTable>` component. The outer list defines the rows. The inner lists define the columns.
+
+### Basic example
+
+```mdx
+<ListTable>
+- - A
+  - B
+  - C
+- - 1
+  - 2
+  - 3
+</ListTable>
+```
+
+![Basic syntax](/img/basicSyntax.png)
+
+**Result**
+
+<ListTable>
+- - A
+  - B
+  - C
+- - 1
+  - 2
+  - 3
+</ListTable>
+
+## Multi-line content
+
+ListTable cells support multiple paragraphs, lists, block quotes, images, and so forth.
+
+<ListTable headerRows={1} caption="Multi-line content example">
+- - Content type
+  - Example
+- - Multiple paragraphs
+  - This is a paragraph.
+
+    This is another paragraph in the same cell.
+- - Lists
+  - - This is a list in a cell.
+    - Lists can have multiple items.
+    - This list has three.
+- - Block quotes
+  - > This cell has a block quote in it.
+    >
+    > Block quotes can have multiple paragraphs.
+- - Admonitions
+  - :::danger
+    Do not mess with Bob.
+    :::
+- - Images
+  - ![Docusaurus logo](/img/docusaurus-official.svg)
+</ListTable>
+
+**MDX source**
+
+```mdx
+<ListTable headerRows={1} caption="Multi-line content example">
+- - Content type
+  - Example
+- - Multiple paragraphs
+  - This is a paragraph.
+
+    This is another paragraph in the same cell.
+- - Lists
+  - - This is a list in a cell.
+    - Lists can have multiple items.
+    - This list has three.
+- - Block quotes
+  - > This cell has a block quote in it.
+    >
+    > Block quotes can have multiple paragraphs.
+- - Admonitions
+  - :::danger
+    Do not mess with Bob.
+    :::
+- - Images
+  - ![Docusaurus logo](/img/docusaurus-official.svg)
+</ListTable>
+```
+
+## Merged cells (rowspan and colspan)
+
+Traditional Markdown doesn't support `rowspan` or `colspan` attributes in tables. The ListTable component bridges this gap by using special syntax in list items:
 
 - `[r2]` - Creates a rowspan of 2
 - `[c3]` - Creates a colspan of 3
 - `[r2c3]` - Combines both (rowspan=2, colspan=3)
 - `_` - Placeholder for cells occupied by spans from above
 
-## Quick Example
-
 Here's a simple table with a rowspan:
 
-import { ListTable } from '@site/src/components/ListTable';
-
-<ListTable headerRows={1} caption="Simple Rowspan Example">
+<ListTable headerRows={1} caption="Simple rowspan example">
 - - Name
   - Role
 - - [r2] Alice
@@ -32,6 +126,21 @@ import { ListTable } from '@site/src/components/ListTable';
 - - Bob
   - Manager
 </ListTable>
+
+**MDX source**
+
+```mdx
+<ListTable headerRows={1} caption="Simple rowspan example">
+- - Name
+  - Role
+- - [r2] Alice
+  - Developer
+- - _
+  - Designer
+- - Bob
+  - Manager
+</ListTable>
+```
 
 ## Browse the Examples
 
