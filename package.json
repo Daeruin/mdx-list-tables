@@ -19,7 +19,10 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "docs:dev": "cd docs && npm start",
+    "docs:build": "cd docs && npm run build",
+    "docs:serve": "cd docs && npm run serve"
   },
   "keywords": [
     "mdx",

@@ -1,0 +1,323 @@
+---
+sidebar_position: 2
+---
+
+# API Reference
+
+Complete API documentation for the ListTable component.
+
+## Component Props
+
+### children (required)
+
+**Type**: `ReactNode`
+
+The nested list structure defining the table content. Must be a Markdown unordered list with nested lists for rows and cells.
+
+```mdx
+<ListTable>
+- - Cell 1
+  - Cell 2
+- - Cell 3
+  - Cell 4
+</ListTable>
+```
+
+### headerRows
+
+**Type**: `number`
+**Default**: `0`
+
+Number of rows from the top to render in `<thead>`. These cells will be `<th>` elements with `scope="col"`.
+
+```mdx
+<ListTable headerRows={1}>
+- - Header 1
+  - Header 2
+- - Data 1
+  - Data 2
+</ListTable>
+```
+
+### headerColumns
+
+**Type**: `number`
+**Default**: `0`
+
+Number of columns from the left to render as row headers. These cells will be `<th>` elements with `scope="row"`.
+
+```mdx
+<ListTable headerColumns={1}>
+- - Row Label 1
+  - Data 1
+- - Row Label 2
+  - Data 2
+</ListTable>
+```
+
+### footerRows
+
+**Type**: `number`
+**Default**: `0`
+
+Number of rows from the bottom to render in `<tfoot>`.
+
+```mdx
+<ListTable footerRows={1}>
+- - Data 1
+  - Data 2
+- - Total
+  - Sum
+</ListTable>
+```
+
+### caption
+
+**Type**: `ReactNode`
+**Default**: `undefined`
+
+Table caption rendered in a `<caption>` element at the top of the table. Improves accessibility by providing context for screen readers.
+
+```mdx
+<ListTable caption="Quarterly Revenue Report">
+- - Q1
+  - $100k
+</ListTable>
+```
+
+### className
+
+**Type**: `string`
+**Default**: `""`
+
+Additional CSS classes to apply to the `<table>` element. Use this for custom styling.
+
+```mdx
+<ListTable className="my-custom-table">
+- - Cell 1
+  - Cell 2
+</ListTable>
+```
+
+### validation
+
+**Type**: `'strict' | 'warn' | 'off'`
+**Default**: `'warn'`
+
+Validation mode for table structure:
+
+- **`'strict'`** - Renders an error display if validation fails instead of the table
+- **`'warn'`** - Logs warnings to console but still renders the table
+- **`'off'`** - Skips validation entirely
+
+```mdx
+<ListTable validation="strict">
+- - Valid table required
+  - Or error shown
+</ListTable>
+```
+
+## Merged Cell Syntax
+
+### Rowspan Marker
+
+**Syntax**: `[r<number>]`
+
+Spans a cell across multiple rows downward.
+
+```mdx
+<ListTable>
+- - [r2] Spans 2 rows
+  - Cell 2
+- - _
+  - Cell 4
+</ListTable>
+```
+
+### Colspan Marker
+
+**Syntax**: `[c<number>]`
+
+Spans a cell across multiple columns to the right.
+
+```mdx
+<ListTable>
+- - [c2] Spans 2 columns
+  - _
+- - Cell 3
+  - Cell 4
+</ListTable>
+```
+
+### Combined Span
+
+**Syntax**: `[r<number>c<number>]`
+
+Spans a cell across both rows and columns.
+
+```mdx
+<ListTable>
+- - [r2c2] Spans 2x2
+  - _
+  - Cell 3
+- - _
+  - _
+  - Cell 6
+- - Cell 7
+  - Cell 8
+  - Cell 9
+</ListTable>
+```
+
+### Placeholder
+
+**Syntax**: `_` (single underscore)
+
+Marks a cell position that's occupied by a merged cell. Required for both rowspan and colspan.
+
+**Important**: Every cell position covered by a span must have a placeholder.
+
+## TypeScript Types
+
+### ListTableProps
+
+```typescript
+interface ListTableProps {
+  children: ReactNode;
+  headerRows?: number;
+  headerColumns?: number;
+  footerRows?: number;
+  className?: string;
+  caption?: ReactNode;
+  validation?: 'strict' | 'warn' | 'off';
+}
+```
+
+### Importing Types
+
+```typescript
+import { ListTable } from 'mdx-list-tables';
+
+// TypeScript will infer props from the component
+const MyTable = (props: Parameters<typeof ListTable>[0]) => {
+  return <ListTable {...props} />;
+};
+```
+
+## Validation Rules
+
+The component validates table structure and provides helpful error messages:
+
+### Invalid Span Values
+
+Detects zero, negative, or non-numeric span values.
+
+```
+[ListTable] error: Invalid span value (0) at row 0, col 0
+```
+
+### Rowspan Overflow
+
+Warns if a rowspan extends beyond table bounds.
+
+```
+[ListTable] error: Cell rowSpan (5) extends beyond table bounds.
+Table has 4 rows (0-3), but span reaches row 6.
+```
+
+### Colspan Overflow
+
+Warns if a colspan extends beyond row width.
+
+```
+[ListTable] error: Cell colSpan (4) extends beyond row bounds.
+Row has 3 columns (0-2), but span reaches column 5.
+```
+
+### Inconsistent Row Widths
+
+Detects rows with different logical widths.
+
+```
+[ListTable] error: Row 1 has inconsistent width.
+Expected 3 columns but got 2.
+```
+
+### Missing Placeholders
+
+Detects if a merged cell doesn't have proper placeholders.
+
+```
+[ListTable] error: Cell at row 0, col 0 has rowSpan=2
+but doesn't have enough placeholders in subsequent rows.
+```
+
+### Orphaned Placeholders
+
+Detects placeholders that don't belong to any merged cell.
+
+```
+[ListTable] error: Placeholder found at row 1, col 1 that
+doesn't belong to a rowSpan or colSpan.
+```
+
+## HTML Output
+
+The component generates semantic HTML tables:
+
+```html
+<table class="your-class-name">
+  <caption>Your Caption</caption>
+  <thead>
+    <tr>
+      <th scope="col">Header 1</th>
+      <th scope="col">Header 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>Footer 1</td>
+      <td>Footer 2</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+### Accessibility Features
+
+- Semantic `<th>` elements with proper `scope` attributes
+- `<caption>` support for table context
+- Proper `<thead>`, `<tbody>`, `<tfoot>` sections
+- Valid `rowspan` and `colspan` attributes
+- No ARIA required (semantic HTML handles it)
+
+## Browser Support
+
+Works in all modern browsers that support:
+- ES2020 JavaScript
+- React 16.8+ (Hooks)
+- Standard table elements
+
+## Framework Compatibility
+
+Compatible with any framework that supports MDX:
+- Docusaurus
+- Next.js (with @next/mdx)
+- Gatsby (with gatsby-plugin-mdx)
+- Astro
+- Remix
+- Vanilla MDX
+
+## Performance
+
+- Minimal runtime overhead (single component)
+- No external dependencies beyond React
+- Bundle size: ~10KB minified (16KB source)
+- Validation only runs once per render
+- Grid tracking uses efficient Set data structure

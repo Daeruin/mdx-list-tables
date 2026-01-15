@@ -2,11 +2,26 @@
  * @type {import('@docusaurus/plugin-content-docs').SidebarsConfig}
  */
 const sidebars = {
-  examplesSidebar: [
+  docsSidebar: [
     {
       type: 'doc',
       id: 'intro',
-      label: 'Introduction',
+      label: 'Getting Started',
+    },
+    {
+      type: 'doc',
+      id: 'api',
+      label: 'API Reference',
+    },
+    {
+      type: 'doc',
+      id: 'accessibility',
+      label: 'Accessibility',
+    },
+    {
+      type: 'doc',
+      id: 'troubleshooting',
+      label: 'Troubleshooting',
     },
     {
       type: 'category',

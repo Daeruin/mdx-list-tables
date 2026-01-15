@@ -1,11 +1,12 @@
 # ListTable Examples
 
-This directory contains comprehensive examples and testing environments for the `mdx-list-tables` component.
+This directory contains testing environments for the `mdx-list-tables` component.
 
 ## What's Inside
 
 - **[storybook/](storybook/)** - Interactive component development and visual testing
-- **[docusaurus/](docusaurus/)** - Real-world MDX integration testing with documentation site
+
+**Note**: The Docusaurus documentation site has moved to `/docs` at the root level and now serves as the main user documentation.
 
 ## Quick Start
 
@@ -33,12 +34,12 @@ Then open [http://localhost:6006](http://localhost:6006) in your browser.
 - **ListTable/Rich Content** - Multi-line text, formatted content, code examples, API references
 - **ListTable/Edge Cases** - Validation modes, boundary conditions, performance tests
 
-### Docusaurus (For MDX Integration Testing)
+### Documentation Site (Docusaurus)
 
-Docusaurus demonstrates how the component works in a real documentation site with actual MDX files:
+For user-facing documentation and MDX integration testing, see the `/docs` directory at the project root:
 
 ```bash
-cd examples/docusaurus
+cd ../docs
 npm install
 npm start
 ```
@@ -93,12 +94,13 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 - Snapshot testing capabilities
 - Hot module reloading
 
-### Integration Testing (Docusaurus)
+### Integration Testing (Documentation Site)
 - Real MDX parsing
 - Actual documentation site behavior
 - Theme integration testing
 - Build process validation
 - Production-like environment
+- See `/docs` directory for the full documentation site
 
 ### Unit Testing (Jest)
 - See `/test.ts` in the root directory
@@ -116,9 +118,9 @@ npm run build-storybook
 
 Outputs to `storybook-static/` directory.
 
-### Docusaurus
+### Documentation Site
 ```bash
-cd examples/docusaurus
+cd docs  # From project root
 npm run build
 ```
 
@@ -127,7 +129,7 @@ Outputs to `build/` directory.
 ## Development Workflow
 
 1. **Start with Storybook** - Develop and test component variations quickly
-2. **Validate in Docusaurus** - Ensure MDX integration works correctly
+2. **Validate in docs site** - Ensure MDX integration works correctly
 3. **Run Unit Tests** - Verify behavior programmatically
 4. **Build Both** - Ensure production builds work
 
@@ -136,8 +138,8 @@ Outputs to `build/` directory.
 When adding new examples:
 
 1. **For Storybook**: Add stories to `examples/storybook/src/*.stories.tsx`
-2. **For Docusaurus**: Add MDX files to `examples/docusaurus/docs/`
-3. Update sidebars in `examples/docusaurus/sidebars.js` if adding new sections
+2. **For docs site**: Add MDX files to `docs/docs/`
+3. Update sidebars in `docs/sidebars.js` if adding new sections
 4. Ensure examples demonstrate a specific use case or feature
 5. Include both the rendered output and the MDX source code
 
@@ -156,10 +158,11 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-### Docusaurus Issues
+### Documentation Site Issues
 
 **Clear cache:**
 ```bash
+cd docs
 npm run clear
 npm start
 ```

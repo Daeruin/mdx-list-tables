@@ -2,7 +2,7 @@
 // In a real deployment, this would import from the published npm package
 // For local testing, we'll use a relative path
 
-import { ListTable as OriginalListTable } from '../../../../ListTable';
+import { ListTable as OriginalListTable } from '../../../ListTable';
 import React, { ReactElement, ReactNode } from 'react';
 
 // Helper to deeply unwrap all MDX components in the tree

@@ -2,10 +2,10 @@
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ListTable Examples',
-  tagline: 'Testing MDX ListTable component',
-  url: 'https://example.com',
-  baseUrl: '/',
+  title: 'MDX List Tables',
+  tagline: 'Create tables with merged cells using intuitive list syntax',
+  url: 'https://yourusername.github.io',
+  baseUrl: '/mdx-list-tables/',
   onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
 
@@ -44,13 +44,18 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'ListTable Examples',
+        title: 'MDX List Tables',
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'examplesSidebar',
+            sidebarId: 'docsSidebar',
             position: 'left',
-            label: 'Examples',
+            label: 'Documentation',
+          },
+          {
+            href: 'https://github.com/yourusername/mdx-list-tables',
+            label: 'GitHub',
+            position: 'right',
           },
         ],
       },

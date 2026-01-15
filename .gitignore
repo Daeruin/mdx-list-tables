@@ -11,6 +11,11 @@ dist/
 build/
 *.tsbuildinfo
 
+# Docusaurus
+.docusaurus/
+docs/.docusaurus/
+docs/build/
+
 # Testing
 coverage/
 .nyc_output/

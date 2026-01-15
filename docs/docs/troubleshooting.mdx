@@ -1,0 +1,577 @@
+---
+sidebar_position: 4
+---
+
+# Troubleshooting
+
+Common issues and their solutions when using ListTable.
+
+## Table Not Rendering
+
+### Check Console for Errors
+
+Open your browser's developer console (F12) to see validation warnings or errors.
+
+### Verify List Structure
+
+ListTable requires a specific nested list structure:
+
+```mdx
+<!-- Correct -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+- - Cell 3
+  - Cell 4
+</ListTable>
+
+<!-- Wrong: Single-level list -->
+<ListTable>
+- Cell 1
+- Cell 2
+</ListTable>
+```
+
+### Check MDX Compilation
+
+Ensure your MDX setup is working:
+
+```bash
+# Next.js
+npm install @next/mdx @mdx-js/loader @mdx-js/react
+
+# Docusaurus (built-in MDX support)
+npm install @docusaurus/preset-classic
+```
+
+## Validation Errors
+
+### "Row has inconsistent width"
+
+All rows must have the same logical width (accounting for colspans).
+
+```mdx
+<!-- Wrong: Row 2 only has 1 column -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+  - Cell 3
+- - Cell 4
+</ListTable>
+
+<!-- Correct: All rows have 3 columns -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+  - Cell 3
+- - Cell 4
+  - Cell 5
+  - Cell 6
+</ListTable>
+
+<!-- Also correct: Using colspan -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+  - Cell 3
+- - [c3] Cell spans all 3
+  - _
+  - _
+</ListTable>
+```
+
+**Fix**: Count logical columns in each row, including colspan values.
+
+### "Cell rowSpan extends beyond table bounds"
+
+A rowspan value is larger than the remaining rows in the table.
+
+```mdx
+<!-- Wrong: rowSpan 5 but only 3 total rows -->
+<ListTable>
+- - [r5] Too tall
+  - Cell 2
+- - _
+  - Cell 4
+- - _
+  - Cell 6
+</ListTable>
+
+<!-- Correct: rowSpan 3 for 3 rows -->
+<ListTable>
+- - [r3] Right size
+  - Cell 2
+- - _
+  - Cell 4
+- - _
+  - Cell 6
+</ListTable>
+```
+
+**Fix**: Reduce the rowspan value or add more rows.
+
+### "Cell colSpan extends beyond row bounds"
+
+A colspan value is larger than the remaining columns in the row.
+
+```mdx
+<!-- Wrong: colSpan 4 but row only has 3 columns -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+  - Cell 3
+- - [c4] Too wide
+  - _
+  - _
+</ListTable>
+
+<!-- Correct: colSpan 3 -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+  - Cell 3
+- - [c3] Right width
+  - _
+  - _
+</ListTable>
+```
+
+**Fix**: Reduce the colspan value or add more columns.
+
+### "Placeholder doesn't belong to any span"
+
+You have a `_` placeholder that isn't occupied by a rowspan or colspan.
+
+```mdx
+<!-- Wrong: Orphaned placeholder -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+- - Cell 3
+  - _
+</ListTable>
+
+<!-- Correct: No unnecessary placeholders -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+- - Cell 3
+  - Cell 4
+</ListTable>
+
+<!-- Or: Use placeholder with span -->
+<ListTable>
+- - [c2] Spans 2
+  - _
+- - Cell 3
+  - Cell 4
+</ListTable>
+```
+
+**Fix**: Remove the placeholder or add a corresponding span.
+
+### "Cell doesn't have enough placeholders"
+
+A merged cell is missing required placeholders.
+
+```mdx
+<!-- Wrong: r2 needs placeholder below -->
+<ListTable>
+- - [r2] Spans down
+  - Cell 2
+- - Cell 3
+  - Cell 4
+</ListTable>
+
+<!-- Correct: Add placeholder -->
+<ListTable>
+- - [r2] Spans down
+  - Cell 2
+- - _
+  - Cell 4
+</ListTable>
+```
+
+**Fix**: Add `_` placeholders for every cell position covered by the span.
+
+### "Invalid span value"
+
+Span values must be positive integers.
+
+```mdx
+<!-- Wrong: Zero, negative, or non-numeric -->
+<ListTable>
+- - [r0] Zero span
+  - [c-1] Negative span
+  - [rabc] Not a number
+</ListTable>
+
+<!-- Correct: Positive integers -->
+<ListTable>
+- - [r2] Two rows
+  - [c3] Three columns
+  - Cell 3
+</ListTable>
+```
+
+**Fix**: Use positive integer values (1, 2, 3, etc.)
+
+## Marker Not Detected
+
+### Marker Must Be at Start
+
+The `[r2]` or `[c3]` marker must be at the very beginning of the cell content.
+
+```mdx
+<!-- Wrong: Marker not at start -->
+<ListTable>
+- - Cell content [r2]
+  - Middle [c2] marker
+</ListTable>
+
+<!-- Correct: Marker at start -->
+<ListTable>
+- - [r2] Cell content
+  - [c2] Then text
+</ListTable>
+
+<!-- Also correct: Marker on own line -->
+<ListTable>
+- - [r2]
+    Cell content on next line
+  - [c2]
+    Text after marker
+</ListTable>
+```
+
+**Fix**: Move the marker to the start of the cell content.
+
+### Check for Extra Whitespace
+
+Extra spaces before the marker prevent detection.
+
+```mdx
+<!-- Wrong: Space before marker -->
+<ListTable>
+- -   [r2] Extra spaces
+</ListTable>
+
+<!-- Correct: No spaces before marker -->
+<ListTable>
+- - [r2] Clean marker
+</ListTable>
+```
+
+**Fix**: Remove leading whitespace.
+
+## Placeholder Not Being Consumed
+
+### Verify Span Direction
+
+Placeholders must be in the right position for the span type.
+
+**Rowspan**: Placeholders go in rows below
+
+```mdx
+<ListTable>
+- - [r2] Spans down ↓
+  - Cell 2
+- - _ ← Placeholder here
+  - Cell 4
+</ListTable>
+```
+
+**Colspan**: Placeholders go in columns to the right
+
+```mdx
+<ListTable>
+- - [c2] Spans right →
+  - _ ← Placeholder here
+</ListTable>
+```
+
+**Both**: Placeholders form a grid
+
+```mdx
+<ListTable>
+- - [r2c2] Spans 2x2 ↓→
+  - _ ← colspan placeholder
+  - Cell 3
+- - _ ← rowspan placeholder
+  - _ ← both
+  - Cell 6
+</ListTable>
+```
+
+### Count Span Values Carefully
+
+Ensure you have the right number of placeholders.
+
+**Example**: `[r3]` needs 2 placeholders (row 2 and row 3)
+
+```mdx
+<ListTable>
+- - [r3] Spans 3 rows
+  - Cell 2
+- - _
+  - Cell 4
+- - _
+  - Cell 6
+</ListTable>
+```
+
+**Example**: `[c4]` needs 3 placeholders (col 2, 3, and 4)
+
+```mdx
+<ListTable>
+- - [c4] Spans 4 columns
+  - _
+  - _
+  - _
+</ListTable>
+```
+
+## Import Errors
+
+### Module Not Found
+
+```
+Error: Cannot find module 'mdx-list-tables'
+```
+
+**Fix**: Install the package
+
+```bash
+npm install mdx-list-tables
+```
+
+### TypeScript Errors
+
+```
+error TS7016: Could not find declaration file for module 'mdx-list-tables'
+```
+
+**Fix**: The package includes TypeScript definitions. Update your tsconfig.json:
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}
+```
+
+### React Version Mismatch
+
+```
+Error: Invalid hook call
+```
+
+**Fix**: Ensure you're using React 16.8+ (hooks support)
+
+```bash
+npm install react@^18.0.0 react-dom@^18.0.0
+```
+
+## Styling Issues
+
+### Table Has No Styles
+
+ListTable renders unstyled tables. Add CSS:
+
+```css
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+```
+
+Or use the `className` prop:
+
+```mdx
+<ListTable className="my-custom-table">
+- - Cell 1
+  - Cell 2
+</ListTable>
+```
+
+### Merged Cells Look Wrong
+
+Browsers may render merged cells differently. Add explicit borders:
+
+```css
+td[rowspan], td[colspan],
+th[rowspan], th[colspan] {
+  border: 2px solid #333;
+}
+```
+
+## Performance Issues
+
+### Large Tables Slow
+
+For tables with 100+ rows:
+
+1. **Use pagination**:
+   ```mdx
+   <ListTable caption="Page 1 of 10">
+   <!-- Only 10 rows at a time -->
+   </ListTable>
+   ```
+
+2. **Disable validation**:
+   ```mdx
+   <ListTable validation="off">
+   <!-- Faster but no error checking -->
+   </ListTable>
+   ```
+
+3. **Consider virtualization**: For very large tables, use a dedicated data table library with virtual scrolling.
+
+### Build Performance
+
+If builds are slow, ensure you're not re-importing the component unnecessarily:
+
+```javascript
+// Good: Single import
+import { ListTable } from 'mdx-list-tables';
+
+// Bad: Repeated imports
+import { ListTable } from 'mdx-list-tables';
+import { ListTable as Table } from 'mdx-list-tables'; // Duplicate
+```
+
+## Framework-Specific Issues
+
+### Next.js
+
+**Issue**: Component not rendering in Next.js
+
+**Fix**: Ensure MDX is configured in `next.config.js`:
+
+```javascript
+const withMDX = require('@next/mdx')();
+
+module.exports = withMDX({
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+});
+```
+
+### Docusaurus
+
+**Issue**: Component not found in Docusaurus
+
+**Fix**: Create a wrapper component in `src/components/` and import from there:
+
+```typescript
+// src/components/ListTable.tsx
+export { ListTable } from 'mdx-list-tables';
+```
+
+Then in MDX:
+```mdx
+import { ListTable } from '@site/src/components/ListTable';
+```
+
+### Gatsby
+
+**Issue**: Build fails with "window is not defined"
+
+**Fix**: ListTable is SSR-compatible, but check your Gatsby plugins:
+
+```javascript
+// gatsby-config.js
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
+      },
+    },
+  ],
+};
+```
+
+## Getting Help
+
+If you're still stuck:
+
+1. **Check the examples**: Look at working examples in the `/docs` directory
+2. **Open an issue**: [GitHub Issues](https://github.com/yourusername/mdx-list-tables/issues)
+3. **Start a discussion**: [GitHub Discussions](https://github.com/yourusername/mdx-list-tables/discussions)
+4. **Read the source**: The component is a single file (`ListTable.tsx`) and well-commented
+
+## Debugging Tips
+
+### Enable Strict Validation
+
+Set `validation="strict"` to see errors directly in the rendered output:
+
+```mdx
+<ListTable validation="strict">
+<!-- Errors show instead of table -->
+</ListTable>
+```
+
+### Check Generated HTML
+
+Inspect the browser's DOM to see what HTML was generated:
+
+1. Right-click the table
+2. Select "Inspect Element"
+3. Verify `<th>`, `<td>`, `rowspan`, `colspan` attributes
+
+### Simplify the Table
+
+If a complex table isn't working, start simple:
+
+```mdx
+<!-- Step 1: Basic table -->
+<ListTable>
+- - Cell 1
+  - Cell 2
+- - Cell 3
+  - Cell 4
+</ListTable>
+
+<!-- Step 2: Add headers -->
+<ListTable headerRows={1}>
+- - Header 1
+  - Header 2
+- - Data 1
+  - Data 2
+</ListTable>
+
+<!-- Step 3: Add spans -->
+<ListTable headerRows={1}>
+- - [c2] Merged Header
+  - _
+- - Data 1
+  - Data 2
+</ListTable>
+```
+
+Add complexity incrementally to identify the issue.
+
+### Use Browser Console
+
+Check for warnings and errors:
+
+```javascript
+// Set validation to warn (default)
+<ListTable validation="warn">
+```
+
+Then open browser console (F12) to see detailed messages.
