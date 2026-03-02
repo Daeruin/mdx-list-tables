@@ -31,14 +31,25 @@ interface ValidationResult {
   errors: ValidationError[];
 }
 
+// Props interfaces for type-safe child traversal
+// (works with both @types/react@18 and @19)
+interface ChildProps {
+  children?: ReactNode;
+}
+
+interface MdxElementProps extends ChildProps {
+  mdxType?: string;
+  originalType?: string;
+}
+
 // --- Helpers ---
 
 // recursive helper to find the text content for Regex parsing
 const getTextContent = (node: ReactNode): string => {
   if (typeof node === 'string') return node;
   if (Array.isArray(node)) return node.map(getTextContent).join('');
-  if (isValidElement(node) && node.props.children) {
-    return getTextContent(node.props.children);
+  if (isValidElement(node) && (node.props as ChildProps).children) {
+    return getTextContent((node.props as ChildProps).children);
   }
   return '';
 };
@@ -264,15 +275,16 @@ export const ListTable = ({
   // 1. Flatten the MDX structure into a 2D Array
   const rawRows: CellData[][] = [];
 
-  const outerList = React.Children.only(children) as ReactElement;
+  const outerList = React.Children.only(children) as ReactElement<MdxElementProps>;
+  const outerProps = outerList.props as MdxElementProps;
   const isUl = outerList?.type === 'ul' ||
-               outerList?.props?.mdxType === 'ul' ||
-               outerList?.props?.originalType === 'ul';
+               outerProps?.mdxType === 'ul' ||
+               outerProps?.originalType === 'ul';
 
   if (!outerList || !isUl) {
      // Fallback or Error handling - include debug info
      const actualType = typeof outerList?.type === 'string' ? outerList?.type : typeof outerList?.type;
-     const mdxType = outerList?.props?.mdxType;
+     const mdxType = outerProps?.mdxType;
      return <div className="p-4 border border-red-500">
        Error: ListTable content must be a Markdown list.
        <br />
@@ -280,28 +292,28 @@ export const ListTable = ({
      </div>;
   }
 
-  React.Children.forEach(outerList.props.children, (rowLi) => {
+  React.Children.forEach(outerProps.children, (rowLi) => {
     // Skip non-element children (text nodes, etc.)
     if (!isValidElement(rowLi)) {
       return;
     }
 
     // Inside Row LI, find the Cell UL
-    const rowElement = rowLi as ReactElement;
-    const rowChildren = React.Children.toArray(rowElement.props.children);
+    const rowElement = rowLi as ReactElement<ChildProps>;
+    const rowChildren = React.Children.toArray((rowElement.props as ChildProps).children);
     const cellList = rowChildren.find(
-      (child: any) => isValidElement(child) && (child.type === 'ul' || (child.props as any)?.mdxType === 'ul')
-    ) as ReactElement;
+      (child) => isValidElement(child) && (child.type === 'ul' || (child.props as MdxElementProps)?.mdxType === 'ul')
+    ) as ReactElement<ChildProps>;
 
     if (cellList) {
       const rowCells: CellData[] = [];
-      React.Children.forEach(cellList.props.children, (cellLi) => {
+      React.Children.forEach((cellList.props as ChildProps).children, (cellLi) => {
         // Skip non-element children
         if (!isValidElement(cellLi)) {
           return;
         }
-        const cellElement = cellLi as ReactElement;
-        rowCells.push(processCell(cellElement.props.children));
+        const cellElement = cellLi as ReactElement<ChildProps>;
+        rowCells.push(processCell((cellElement.props as ChildProps).children));
       });
       rawRows.push(rowCells);
     }
