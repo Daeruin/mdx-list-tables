@@ -147,7 +147,7 @@ const validateTable = (
       if (effectiveRowSpan > 1 && rowIndex + effectiveRowSpan > totalRows) {
         errors.push({
           type: 'error',
-          message: `Cell rowSpan (${cell.rowSpan}) extends beyond table bounds. Table has ${totalRows} rows (0-${totalRows - 1}), but span reaches row ${rowIndex + effectiveRowSpan - 1}.`,
+          message: `Cell rowSpan (${cell.rowSpan}) extends beyond table bounds. Table has ${totalRows} rows (1-${totalRows}), but span reaches row ${rowIndex + effectiveRowSpan}.`,
           row: rowIndex,
           col: cellIndex,
         });
@@ -196,7 +196,7 @@ const validateTable = (
         if (placeholderCount < effectiveRowSpan - 1) {
           errors.push({
             type: 'error',
-            message: `Cell rowSpan (${cell.rowSpan}) doesn't have enough placeholders. Expected ${effectiveRowSpan - 1} placeholders in following rows at column ${cellIndex}, found ${placeholderCount}.`,
+            message: `Cell rowSpan (${cell.rowSpan}) doesn't have enough placeholders. Expected ${effectiveRowSpan - 1} placeholders in following rows at column ${cellIndex + 1}, found ${placeholderCount}.`,
             row: rowIndex,
             col: cellIndex,
           });
@@ -242,7 +242,7 @@ const TableErrorDisplay = ({ errors }: { errors: ValidationError[] }) => (
     <ul className="list-disc list-inside space-y-1">
       {errors.map((err, i) => (
         <li key={i} className={err.type === 'error' ? 'text-red-600' : 'text-orange-600'}>
-          {err.row !== undefined ? `Row ${err.row}${err.col !== undefined ? `, Col ${err.col}` : ''}: ` : ''}
+          {err.row !== undefined ? `Row ${err.row + 1}${err.col !== undefined ? `, Col ${err.col + 1}` : ''}: ` : ''}
           {err.message}
         </li>
       ))}
@@ -324,7 +324,7 @@ export const ListTable = ({
         : 'table';
 
     validationResult.errors.forEach(err => {
-      const location = err.row !== undefined ? ` Row ${err.row}` : '';
+      const location = err.row !== undefined ? ` Row ${err.row + 1}` : '';
       console.warn(`[ListTable ${tableIdentifier}] ${err.type}: ${err.message}${location}`);
     });
   }
