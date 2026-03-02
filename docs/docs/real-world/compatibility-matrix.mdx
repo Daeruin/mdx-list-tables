@@ -1,0 +1,572 @@
+---
+sidebar_position: 3
+---
+
+# Compatibility and support matrices
+
+Browser support, platform compatibility, and version compatibility tables.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Browser compatibility
+
+<ListTable headerRows={2} headerColumns={1} caption="CSS grid browser support" validation="strict">
+- - [r2] Feature
+  - [c4] Desktop browsers
+  - _
+  - _
+  - _
+  - [c3] Mobile browsers
+  - _
+  - _
+- - _
+  - Chrome
+  - Firefox
+  - Safari
+  - Edge
+  - iOS Safari
+  - Chrome Android
+  - Samsung Internet
+- - Basic grid
+  - ✅ 57+
+  - ✅ 52+
+  - ✅ 10.1+
+  - ✅ 16+
+  - ✅ 10.3+
+  - ✅ 57+
+  - ✅ 6.0+
+- - Subgrid
+  - ✅ 117+
+  - ✅ 71+
+  - ✅ 16+
+  - ✅ 117+
+  - ✅ 16+
+  - ✅ 117+
+  - ❌ Not supported
+- - `gap` property
+  - ✅ 66+
+  - ✅ 61+
+  - ✅ 12+
+  - ✅ 16+
+  - ✅ 12+
+  - ✅ 66+
+  - ✅ 9.0+
+- - `grid-template-areas`
+  - ✅ 57+
+  - ✅ 52+
+  - ✅ 10.1+
+  - ✅ 16+
+  - ✅ 10.3+
+  - ✅ 57+
+  - ✅ 6.0+
+- - Animation support
+  - ✅ 66+
+  - ✅ 66+
+  - ✅ 12+
+  - ✅ 79+
+  - ✅ 12+
+  - ✅ 66+
+  - ✅ 9.0+
+- - Intrinsic sizing
+  - ✅ 57+
+  - ✅ 70+
+  - ✅ 10.1+
+  - ✅ 16+
+  - ✅ 10.3+
+  - ✅ 57+
+  - ✅ 6.0+
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={2} headerColumns={1} caption="CSS grid browser support">
+- - Feature
+  - [c4] Desktop browsers
+  - _
+  - _
+  - _
+  - [c3] Mobile browsers
+  - _
+  - _
+- - _
+  - Chrome
+  - Firefox
+  - Safari
+  - Edge
+  - iOS Safari
+  - Chrome Android
+  - Samsung Internet
+- - Basic grid
+  - ✅ 57+
+  - ✅ 52+
+  - ✅ 10.1+
+  - ✅ 16+
+  - ✅ 10.3+
+  - ✅ 57+
+  - ✅ 6.0+
+- - Subgrid
+  - ✅ 117+
+  - ✅ 71+
+  - ✅ 16+
+  - ✅ 117+
+  - ✅ 16+
+  - ✅ 117+
+  - ❌ Not supported
+...
+</ListTable>
+```
+
+## JavaScript API compatibility
+
+<ListTable headerRows={1} headerColumns={1} caption="Modern JavaScript APIs - browser support" validation="strict">
+- - API
+  - Chrome
+  - Firefox
+  - Safari
+  - Edge
+  - Notes
+- - `fetch()`
+  - ✅ 42+
+  - ✅ 39+
+  - ✅ 10.1+
+  - ✅ 14+
+  - Polyfill available for older browsers
+- - `Promise.allSettled()`
+  - ✅ 76+
+  - ✅ 71+
+  - ✅ 13+
+  - ✅ 79+
+  - Added in ES2020
+- - `Promise.any()`
+  - ✅ 85+
+  - ✅ 79+
+  - ✅ 14+
+  - ✅ 85+
+  - Added in ES2021
+- - `async`/`await`
+  - ✅ 55+
+  - ✅ 52+
+  - ✅ 10.1+
+  - ✅ 15+
+  - Transpile with Babel for older browsers
+- - `Optional chaining (?.)`
+  - ✅ 80+
+  - ✅ 74+
+  - ✅ 13.1+
+  - ✅ 80+
+  - Requires modern build tooling
+- - `Nullish coalescing (??)`
+  - ✅ 80+
+  - ✅ 72+
+  - ✅ 13.1+
+  - ✅ 80+
+  - Requires modern build tooling
+- - `WeakRef`
+  - ✅ 84+
+  - ✅ 79+
+  - ✅ 14.1+
+  - ✅ 84+
+  - For advanced memory management
+- - `FinalizationRegistry`
+  - ✅ 84+
+  - ✅ 79+
+  - ✅ 14.1+
+  - ✅ 84+
+  - For cleanup callbacks
+- - `Array.prototype.at()`
+  - ✅ 92+
+  - ✅ 90+
+  - ✅ 15.4+
+  - ✅ 92+
+  - Easily polyfilled
+- - `structuredClone()`
+  - ✅ 98+
+  - ✅ 94+
+  - ✅ 15.4+
+  - ✅ 98+
+  - Deep cloning without libraries
+- - Web Crypto API
+  - ✅ 37+
+  - ✅ 34+
+  - ✅ 11+
+  - ✅ 79+
+  - Secure random numbers, hashing, encryption
+- - Intersection Observer
+  - ✅ 51+
+  - ✅ 55+
+  - ✅ 12.1+
+  - ✅ 15+
+  - Efficient scroll detection, lazy loading
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} headerColumns={1} caption="Modern JavaScript APIs - browser support">
+- - API
+  - Chrome
+  - Firefox
+  - Safari
+  - Edge
+  - Notes
+- - `fetch()`
+  - ✅ 42+
+  - ✅ 39+
+  - ✅ 10.1+
+  - ✅ 14+
+  - Polyfill available for older browsers
+- - `Promise.allSettled()`
+  - ✅ 76+
+  - ✅ 71+
+  - ✅ 13+
+  - ✅ 79+
+  - Added in ES2020
+...
+</ListTable>
+```
+
+## Node.js package compatibility
+
+<ListTable headerRows={1} caption="Framework version compatibility matrix" validation="strict">
+- - Framework
+  - Node.js 16
+  - Node.js 18
+  - Node.js 20
+  - Node.js 21
+  - Notes
+- - Next.js 13
+  - ✅ Supported
+  - ✅ Recommended
+  - ✅ Supported
+  - ⚠️ Experimental
+  - LTS version, production-ready
+- - Next.js 14
+  - ❌ Not supported
+  - ✅ Minimum
+  - ✅ Recommended
+  - ✅ Supported
+  - Requires Node.js 18.17+
+- - React 18
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - Works with all modern Node versions
+- - Vue 3.3
+  - ✅ Supported
+  - ✅ Recommended
+  - ✅ Supported
+  - ✅ Supported
+  - Requires Node.js 16+
+- - Angular 17
+  - ❌ Not supported
+  - ✅ Minimum
+  - ✅ Recommended
+  - ✅ Supported
+  - Requires Node.js 18.13+
+- - Svelte 4
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Recommended
+  - ✅ Supported
+  - Works with Node.js 16+
+- - Astro 4
+  - ❌ Not supported
+  - ✅ Minimum
+  - ✅ Recommended
+  - ✅ Supported
+  - Requires Node.js 18.14.1+
+- - Remix 2
+  - ❌ Not supported
+  - ✅ Minimum
+  - ✅ Recommended
+  - ✅ Supported
+  - Requires Node.js 18+
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Framework version compatibility matrix">
+- - Framework
+  - Node.js 16
+  - Node.js 18
+  - Node.js 20
+  - Node.js 21
+  - Notes
+- - Next.js 13
+  - ✅ Supported
+  - ✅ Recommended
+  - ✅ Supported
+  - ⚠️ Experimental
+  - LTS version, production-ready
+- - Next.js 14
+  - ❌ Not supported
+  - ✅ Minimum
+  - ✅ Recommended
+  - ✅ Supported
+  - Requires Node.js 18.17+
+...
+</ListTable>
+```
+
+## Operating system support
+
+<ListTable headerRows={2} headerColumns={1} caption="Docker Desktop system requirements" validation="strict">
+- - [r2] Component
+  - [c3] Windows
+  - _
+  - _
+  - [c2] macOS
+  - _
+  - Linux
+- - _
+  - Windows 11
+  - Windows 10
+  - Windows Server
+  - Intel chip
+  - Apple silicon
+  - Ubuntu/Debian
+- - Docker Desktop 4.25
+  - ✅ 21H2+
+  - ✅ 22H2+
+  - ✅ 2019+
+  - ✅ 10.15+
+  - ✅ Big Sur 11+
+  - ✅ 20.04+
+- - Minimum RAM
+  - 4 GB
+  - 4 GB
+  - 4 GB
+  - 4 GB
+  - 4 GB
+  - 4 GB
+- - Recommended RAM
+  - 8 GB
+  - 8 GB
+  - 16 GB
+  - 8 GB
+  - 8 GB
+  - 8 GB
+- - Disk space
+  - 10 GB
+  - 10 GB
+  - 20 GB
+  - 10 GB
+  - 10 GB
+  - 10 GB
+- - WSL 2 required
+  - ✅ Yes
+  - ✅ Yes
+  - ✅ Yes
+  - N/A
+  - N/A
+  - N/A
+- - Virtualization
+  - Hyper-V or WSL 2
+  - Hyper-V or WSL 2
+  - Hyper-V
+  - HyperKit
+  - Virtualization.framework
+  - KVM
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={2} headerColumns={1} caption="Docker Desktop system requirements">
+- - [r2] Component
+  - [c3] Windows
+  - _
+  - _
+  - [c2] macOS
+  - _
+  - Linux
+- - _
+  - Windows 11
+  - Windows 10
+  - Windows Server
+  - Intel chip
+  - Apple silicon
+  - Ubuntu/Debian
+- - Docker Desktop 4.25
+  - ✅ 21H2+
+  - ✅ 22H2+
+  - ✅ 2019+
+  - ✅ 10.15+
+  - ✅ Big Sur 11+
+  - ✅ 20.04+
+- - Minimum RAM
+  - 4 GB
+  - 4 GB
+  - 4 GB
+  - 4 GB
+  - 4 GB
+  - 4 GB
+...
+</ListTable>
+```
+
+## Database driver compatibility
+
+<ListTable headerRows={1} headerColumns={1} caption="PostgreSQL driver compatibility" validation="strict">
+- - Driver/ORM
+  - PostgreSQL 12
+  - PostgreSQL 13
+  - PostgreSQL 14
+  - PostgreSQL 15
+  - PostgreSQL 16
+  - Notes
+- - `pg` (node-postgres) v8.x
+  - ✅ Full support
+  - ✅ Full support
+  - ✅ Full support
+  - ✅ Full support
+  - ✅ Full support
+  - Official Node.js driver
+- - Prisma 5.x
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Recommended
+  - ✅ Supported
+  - Best performance on PG 15+
+- - TypeORM 0.3.x
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ⚠️ Experimental
+  - Some PG 16 features not yet supported
+- - Sequelize 6.x
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - Mature, stable support
+- - Drizzle ORM 0.29.x
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Recommended
+  - ✅ Supported
+  - Modern, TypeScript-first ORM
+- - Kysely 0.27.x
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - Type-safe query builder
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} headerColumns={1} caption="PostgreSQL driver compatibility" validation="strict">
+- - Driver/ORM
+  - PostgreSQL 12
+  - PostgreSQL 13
+  - PostgreSQL 14
+  - PostgreSQL 15
+  - PostgreSQL 16
+  - Notes
+- - `pg` (node-postgres) v8.x
+  - ✅ Full support
+  - ✅ Full support
+  - ✅ Full support
+  - ✅ Full support
+  - ✅ Full support
+  - Official Node.js driver
+- - Prisma 5.x
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Recommended
+  - ✅ Supported
+  - Best performance on PG 15+
+- - TypeORM 0.3.x
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ✅ Supported
+  - ⚠️ Experimental
+  - Some PG 16 features not yet supported
+...
+</ListTable>
+```
+
+## Third-party integration support
+
+<ListTable headerRows={1} caption="Authentication provider SDK compatibility" validation="strict">
+- - Provider
+  - Web SDK
+  - React SDK
+  - Vue SDK
+  - Angular SDK
+  - Mobile (React Native)
+- - Auth0
+  - ✅ `@auth0/auth0-spa-js`
+  - ✅ `@auth0/auth0-react`
+  - ✅ Community package
+  - ✅ `@auth0/auth0-angular`
+  - ✅ `react-native-auth0`
+- - Firebase Auth
+  - ✅ `firebase/auth`
+  - ✅ Built-in hooks
+  - ✅ `vuefire`
+  - ✅ `@angular/fire`
+  - ✅ `@react-native-firebase/auth`
+- - Supabase Auth
+  - ✅ `@supabase/supabase-js`
+  - ✅ Built-in hooks
+  - ✅ `@supabase/supabase-js`
+  - ✅ `@supabase/supabase-js`
+  - ✅ `@supabase/supabase-js`
+- - Clerk
+  - ✅ `@clerk/clerk-js`
+  - ✅ `@clerk/clerk-react`
+  - ✅ `vue-clerk`
+  - ❌ Not supported
+  - ✅ `@clerk/clerk-expo`
+- - AWS Cognito
+  - ✅ `amazon-cognito-identity-js`
+  - ✅ `@aws-amplify/ui-react`
+  - ✅ `@aws-amplify/ui-vue`
+  - ✅ `@aws-amplify/ui-angular`
+  - ✅ `aws-amplify-react-native`
+- - Okta
+  - ✅ `@okta/okta-auth-js`
+  - ✅ `@okta/okta-react`
+  - ✅ `@okta/okta-vue`
+  - ✅ `@okta/okta-angular`
+  - ✅ `@okta/okta-react-native`
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Authentication provider SDK compatibility" validation="strict">
+- - Provider
+  - Web SDK
+  - React SDK
+  - Vue SDK
+  - Angular SDK
+  - Mobile (React Native)
+- - Auth0
+  - ✅ `@auth0/auth0-spa-js`
+  - ✅ `@auth0/auth0-react`
+  - ✅ Community package
+  - ✅ `@auth0/auth0-angular`
+  - ✅ `react-native-auth0`
+- - Firebase Auth
+  - ✅ `firebase/auth`
+  - ✅ Built-in hooks
+  - ✅ `vuefire`
+  - ✅ `@angular/fire`
+  - ✅ `@react-native-firebase/auth`
+...
+</ListTable>
+```

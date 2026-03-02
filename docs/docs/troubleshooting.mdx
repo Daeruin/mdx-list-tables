@@ -6,17 +6,17 @@ sidebar_position: 4
 
 Common issues and their solutions when using ListTable.
 
-## Table Not Rendering
+## Table not rendering
 
-### Check Console for Errors
+### Check console for errors
 
 Open your browser's developer console (F12) to see validation warnings or errors.
 
-### Verify List Structure
+### Verify list structure
 
 ListTable requires a specific nested list structure:
 
-```mdx
+```jsx
 <!-- Correct -->
 <ListTable>
 - - Cell 1
@@ -32,7 +32,7 @@ ListTable requires a specific nested list structure:
 </ListTable>
 ```
 
-### Check MDX Compilation
+### Check MDX compilation
 
 Ensure your MDX setup is working:
 
@@ -44,13 +44,13 @@ npm install @next/mdx @mdx-js/loader @mdx-js/react
 npm install @docusaurus/preset-classic
 ```
 
-## Validation Errors
+## Validation errors
 
 ### "Row has inconsistent width"
 
 All rows must have the same logical width (accounting for colspans).
 
-```mdx
+```jsx
 <!-- Wrong: Row 2 only has 1 column -->
 <ListTable>
 - - Cell 1
@@ -86,7 +86,7 @@ All rows must have the same logical width (accounting for colspans).
 
 A rowspan value is larger than the remaining rows in the table.
 
-```mdx
+```jsx
 <!-- Wrong: rowSpan 5 but only 3 total rows -->
 <ListTable>
 - - [r5] Too tall
@@ -114,7 +114,7 @@ A rowspan value is larger than the remaining rows in the table.
 
 A colspan value is larger than the remaining columns in the row.
 
-```mdx
+```jsx
 <!-- Wrong: colSpan 4 but row only has 3 columns -->
 <ListTable>
 - - Cell 1
@@ -142,7 +142,7 @@ A colspan value is larger than the remaining columns in the row.
 
 You have a `_` placeholder that isn't occupied by a rowspan or colspan.
 
-```mdx
+```jsx
 <!-- Wrong: Orphaned placeholder -->
 <ListTable>
 - - Cell 1
@@ -174,7 +174,7 @@ You have a `_` placeholder that isn't occupied by a rowspan or colspan.
 
 A merged cell is missing required placeholders.
 
-```mdx
+```jsx
 <!-- Wrong: r2 needs placeholder below -->
 <ListTable>
 - - [r2] Spans down
@@ -198,7 +198,7 @@ A merged cell is missing required placeholders.
 
 Span values must be positive integers.
 
-```mdx
+```jsx
 <!-- Wrong: Zero, negative, or non-numeric -->
 <ListTable>
 - - [r0] Zero span
@@ -216,13 +216,13 @@ Span values must be positive integers.
 
 **Fix**: Use positive integer values (1, 2, 3, etc.)
 
-## Marker Not Detected
+## Marker not detected
 
-### Marker Must Be at Start
+### Marker must be at start
 
 The `[r2]` or `[c3]` marker must be at the very beginning of the cell content.
 
-```mdx
+```jsx
 <!-- Wrong: Marker not at start -->
 <ListTable>
 - - Cell content [r2]
@@ -250,7 +250,7 @@ The `[r2]` or `[c3]` marker must be at the very beginning of the cell content.
 
 Extra spaces before the marker prevent detection.
 
-```mdx
+```jsx
 <!-- Wrong: Space before marker -->
 <ListTable>
 - -   [r2] Extra spaces
@@ -264,15 +264,15 @@ Extra spaces before the marker prevent detection.
 
 **Fix**: Remove leading whitespace.
 
-## Placeholder Not Being Consumed
+## Placeholder not being consumed
 
-### Verify Span Direction
+### Verify span direction
 
 Placeholders must be in the right position for the span type.
 
 **Rowspan**: Placeholders go in rows below
 
-```mdx
+```jsx
 <ListTable>
 - - [r2] Spans down ↓
   - Cell 2
@@ -283,7 +283,7 @@ Placeholders must be in the right position for the span type.
 
 **Colspan**: Placeholders go in columns to the right
 
-```mdx
+```jsx
 <ListTable>
 - - [c2] Spans right →
   - _ ← Placeholder here
@@ -292,7 +292,7 @@ Placeholders must be in the right position for the span type.
 
 **Both**: Placeholders form a grid
 
-```mdx
+```jsx
 <ListTable>
 - - [r2c2] Spans 2x2 ↓→
   - _ ← colspan placeholder
@@ -303,13 +303,13 @@ Placeholders must be in the right position for the span type.
 </ListTable>
 ```
 
-### Count Span Values Carefully
+### Count span values carefully
 
 Ensure you have the right number of placeholders.
 
 **Example**: `[r3]` needs 2 placeholders (row 2 and row 3)
 
-```mdx
+```jsx
 <ListTable>
 - - [r3] Spans 3 rows
   - Cell 2
@@ -322,7 +322,7 @@ Ensure you have the right number of placeholders.
 
 **Example**: `[c4]` needs 3 placeholders (col 2, 3, and 4)
 
-```mdx
+```jsx
 <ListTable>
 - - [c4] Spans 4 columns
   - _
@@ -331,9 +331,9 @@ Ensure you have the right number of placeholders.
 </ListTable>
 ```
 
-## Import Errors
+## Import errors
 
-### Module Not Found
+### Module not found
 
 ```
 Error: Cannot find module 'mdx-list-tables'
@@ -345,7 +345,7 @@ Error: Cannot find module 'mdx-list-tables'
 npm install mdx-list-tables
 ```
 
-### TypeScript Errors
+### TypeScript errors
 
 ```
 error TS7016: Could not find declaration file for module 'mdx-list-tables'
@@ -361,7 +361,7 @@ error TS7016: Could not find declaration file for module 'mdx-list-tables'
 }
 ```
 
-### React Version Mismatch
+### React version mismatch
 
 ```
 Error: Invalid hook call
@@ -373,9 +373,9 @@ Error: Invalid hook call
 npm install react@^18.0.0 react-dom@^18.0.0
 ```
 
-## Styling Issues
+## Styling issues
 
-### Table Has No Styles
+### Table has no styles
 
 ListTable renders unstyled tables. Add CSS:
 
@@ -399,14 +399,14 @@ th {
 
 Or use the `className` prop:
 
-```mdx
+```jsx
 <ListTable className="my-custom-table">
 - - Cell 1
   - Cell 2
 </ListTable>
 ```
 
-### Merged Cells Look Wrong
+### Merged cells look wrong
 
 Browsers may render merged cells differently. Add explicit borders:
 
@@ -417,21 +417,21 @@ th[rowspan], th[colspan] {
 }
 ```
 
-## Performance Issues
+## Performance issues
 
-### Large Tables Slow
+### Large tables Slow
 
 For tables with 100+ rows:
 
 1. **Use pagination**:
-   ```mdx
+   ```jsx
    <ListTable caption="Page 1 of 10">
    <!-- Only 10 rows at a time -->
    </ListTable>
    ```
 
 2. **Disable validation**:
-   ```mdx
+   ```jsx
    <ListTable validation="off">
    <!-- Faster but no error checking -->
    </ListTable>
@@ -439,7 +439,7 @@ For tables with 100+ rows:
 
 3. **Consider virtualization**: For very large tables, use a dedicated data table library with virtual scrolling.
 
-### Build Performance
+### Build performance
 
 If builds are slow, ensure you're not re-importing the component unnecessarily:
 
@@ -452,7 +452,7 @@ import { ListTable } from 'mdx-list-tables';
 import { ListTable as Table } from 'mdx-list-tables'; // Duplicate
 ```
 
-## Framework-Specific Issues
+## Framework-specific issues
 
 ### Next.js
 
@@ -480,7 +480,7 @@ export { ListTable } from 'mdx-list-tables';
 ```
 
 Then in MDX:
-```mdx
+```jsx
 import { ListTable } from '@site/src/components/ListTable';
 ```
 
@@ -504,7 +504,7 @@ module.exports = {
 };
 ```
 
-## Getting Help
+## Getting help
 
 If you're still stuck:
 
@@ -513,37 +513,37 @@ If you're still stuck:
 3. **Start a discussion**: [GitHub Discussions](https://github.com/Daeruin/mdx-list-tables/discussions)
 4. **Read the source**: The component is a single file (`ListTable.tsx`) and well-commented
 
-## Debugging Tips
+## Debugging tips
 
-### Identify Tables with Errors
+### Identify tables with errors
 
 When building your site, validation errors appear in the console. To identify which table has errors:
 
 1. **Use captions** - Error messages include the caption automatically:
-   ```mdx
-   <ListTable caption="My Problem Table">
+   ```jsx
+   <ListTable caption="My problem table">
    ```
-   Console shows: `[ListTable caption="My Problem Table"] error: ...`
+   Console shows: `[ListTable caption="My problem table"] error: ...`
 
 2. **Add an `id` prop** for debugging - Useful when you don't want a visible caption:
-   ```mdx
+   ```jsx
    <ListTable id="pricing-table-v2">
    ```
    Console shows: `[ListTable id="pricing-table-v2"] error: ...`
 
 3. **Search for the caption/id** - Use your editor to find the table by its identifier
 
-### Enable Strict Validation
+### Enable strict validation
 
 Set `validation="strict"` to see errors directly in the rendered output instead of console warnings:
 
-```mdx
+```jsx
 <ListTable validation="strict">
 <!-- Errors show in the page instead of table -->
 </ListTable>
 ```
 
-### Check Generated HTML
+### Check generated HTML
 
 Inspect the browser's DOM to see what HTML was generated:
 
@@ -555,7 +555,7 @@ Inspect the browser's DOM to see what HTML was generated:
 
 If a complex table isn't working, start simple:
 
-```mdx
+```jsx
 <!-- Step 1: Basic table -->
 <ListTable>
 - - Cell 1
@@ -583,7 +583,7 @@ If a complex table isn't working, start simple:
 
 Add complexity incrementally to identify the issue.
 
-### Use Browser Console
+### Use browser console
 
 Check for warnings and errors:
 

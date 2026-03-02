@@ -6,11 +6,11 @@ const sidebars = {
     {
       type: 'doc',
       id: 'intro',
-      label: 'Getting Started',
+      label: 'Getting started',
     },
     {
       type: 'category',
-      label: 'Basic Examples',
+      label: 'Basic examples',
       items: [
         'basic/simple-table',
         'basic/rowspan',
@@ -20,26 +20,26 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Rich Content Examples',
+      label: 'Rich content examples',
       items: [
         'rich-content/multiline-text',
         'rich-content/formatted-text',
-        'rich-content/api-reference',
+        'rich-content/advanced-content',
       ],
     },
     {
       type: 'category',
-      label: 'Real World Examples',
+      label: 'Real world examples',
       items: [
-        'real-world/pricing-table',
-        'real-world/comparison-matrix',
-        'real-world/financial-report',
+        'real-world/api-reference',
+        'real-world/cli-reference',
+        'real-world/compatibility-matrix',
       ],
     },
     {
       type: 'doc',
       id: 'api',
-      label: 'API Reference',
+      label: 'API reference',
     },
     {
       type: 'doc',
@@ -48,13 +48,13 @@ const sidebars = {
     },
     {
       type: 'doc',
-      id: 'troubleshooting',
-      label: 'Troubleshooting',
+      id: 'validation-modes',
+      label: 'Validation modes',
     },
     {
       type: 'doc',
-      id: 'validation-modes',
-      label: 'Validation Modes',
+      id: 'troubleshooting',
+      label: 'Troubleshooting',
     },
   ],
 };

@@ -2,38 +2,41 @@
 sidebar_position: 1
 ---
 
-# Multi-line Text
+# Multi-line text
 
 Cell content can include line breaks, formatting, and complex text structures.
 
 import { ListTable } from '@site/src/components/ListTable';
 
-## Basic Multi-line Content
+## Basic multi-line content
 
-<ListTable headerRows={1} caption="Server Configuration">
+As with vanilla Markdown tables, you can use a backslash at the end of a line to force a line break without making a new paragraph.
+
+<ListTable headerRows={1} caption="Server configuration" validation="strict">
 - - Component
   - Configuration
   - Notes
 - - Web Server
-  - Port: 8080\
-    Host: 0.0.0.0\
-    SSL: Enabled
+  - **Port:** 8080\
+    **Host:** 0.0.0.0\
+    **SSL:** Enabled
   - Production ready
 - - Database
-  - Type: PostgreSQL\
-    Version: 14.2\
-    Pool: 20 connections
+  - **Type:** PostgreSQL\
+    **Version:** 14.2\
+    **Pool:** 20 connections
   - Requires backup config
 - - Cache
-  - Type: Redis\
-    Memory: 2GB\
-    Eviction: LRU
+  - **Type:** Redis\
+    **Memory:** 2GB\
+    **Eviction:** LRU
   - Monitor memory usage
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Server Configuration">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Server configuration">
 - - Component
   - Configuration
   - Notes
@@ -48,7 +51,10 @@ import { ListTable } from '@site/src/components/ListTable';
 
 ## Lists in Cells
 
-<ListTable headerRows={1} caption="Feature Comparison">
+You can put ordered or unordered lists inside a table cell. To put a list in a table cell, use regular Markdown syntax for the content of the cell. In this case, the first two levels of the list define the table, while the third level of the list defines a list inside a table cell.
+
+
+<ListTable headerRows={1} caption="Feature comparison" validation="strict">
 - - Plan
   - Features
   - Price
@@ -73,9 +79,10 @@ import { ListTable } from '@site/src/components/ListTable';
   - Custom
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Feature Comparison">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Feature comparison">
 - - Plan
   - Features
   - Price
@@ -101,68 +108,11 @@ import { ListTable } from '@site/src/components/ListTable';
 </ListTable>
 ```
 
-## Formatted Descriptions
+## Long descriptions
 
-<ListTable headerRows={1} caption="Environment Variables">
-- - Variable
-  - Description
-  - Example
-- - `DATABASE_URL`
-  - **Required**\
-    PostgreSQL connection string\
-    _Format: postgresql://user:pass@host:port/db_
-  - `postgresql://app:secret@localhost:5432/myapp`
-- - `API_KEY`
-  - **Required**\
-    Third-party API authentication key\
-    _Obtain from dashboard_
-  - `sk_live_abc123...`
-- - `LOG_LEVEL`
-  - **Optional**\
-    Application logging verbosity\
-    _Default: info_\
-    _Options: error, warn, info, debug_
-  - `info`
-- - `PORT`
-  - **Optional**\
-    HTTP server port\
-    _Default: 3000_
-  - `8080`
-</ListTable>
+To put paragraphs breaks inside a table cell, leave a blank line between lines of text, just as you would in normal Markdown. You can use a mix of line breaks and paragraph breaks in the same cell.
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Environment Variables">
-- - Variable
-  - Description
-  - Example
-- - `DATABASE_URL`
-  - **Required**\
-    PostgreSQL connection string\
-    _Format: postgresql://user:pass@host:port/db_
-  - `postgresql://app:secret@localhost:5432/myapp`
-- - `API_KEY`
-  - **Required**\
-    Third-party API authentication key\
-    _Obtain from dashboard_
-  - `sk_live_abc123...`
-- - `LOG_LEVEL`
-  - **Optional**\
-    Application logging verbosity\
-    _Default: info_\
-    _Options: error, warn, info, debug_
-  - `info`
-- - `PORT`
-  - **Optional**\
-    HTTP server port\
-    _Default: 3000_
-  - `8080`
-</ListTable>
-```
-
-## Long Descriptions
-
-<ListTable headerRows={1} caption="API Endpoints">
+<ListTable headerRows={1} caption="API endpoints" validation="strict">
 - - Endpoint
   - Description
   - Authentication
@@ -197,9 +147,10 @@ import { ListTable } from '@site/src/components/ListTable';
   - Bearer token (admin only)
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="API Endpoints">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="API endpoints">
 - - Endpoint
   - Description
   - Authentication

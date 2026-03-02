@@ -2,11 +2,11 @@
 sidebar_position: 2
 ---
 
-# API Reference
+# API reference
 
 Complete API documentation for the ListTable component.
 
-## Component Props
+## Component props
 
 ### children (required)
 
@@ -14,7 +14,7 @@ Complete API documentation for the ListTable component.
 
 The nested list structure defining the table content. Must be a Markdown unordered list with nested lists for rows and cells.
 
-```mdx
+```jsx
 <ListTable>
 - - Cell 1
   - Cell 2
@@ -30,7 +30,7 @@ The nested list structure defining the table content. Must be a Markdown unorder
 
 Number of rows from the top to render in `<thead>`. These cells will be `<th>` elements with `scope="col"`.
 
-```mdx
+```jsx
 <ListTable headerRows={1}>
 - - Header 1
   - Header 2
@@ -46,7 +46,7 @@ Number of rows from the top to render in `<thead>`. These cells will be `<th>` e
 
 Number of columns from the left to render as row headers. These cells will be `<th>` elements with `scope="row"`.
 
-```mdx
+```jsx
 <ListTable headerColumns={1}>
 - - Row Label 1
   - Data 1
@@ -62,7 +62,7 @@ Number of columns from the left to render as row headers. These cells will be `<
 
 Number of rows from the bottom to render in `<tfoot>`.
 
-```mdx
+```jsx
 <ListTable footerRows={1}>
 - - Data 1
   - Data 2
@@ -78,8 +78,8 @@ Number of rows from the bottom to render in `<tfoot>`.
 
 Table caption rendered in a `<caption>` element at the top of the table. Improves accessibility by providing context for screen readers.
 
-```mdx
-<ListTable caption="Quarterly Revenue Report">
+```jsx
+<ListTable caption="Quarterly revenue report">
 - - Q1
   - $100k
 </ListTable>
@@ -92,7 +92,7 @@ Table caption rendered in a `<caption>` element at the top of the table. Improve
 
 Additional CSS classes to apply to the `<table>` element. Use this for custom styling.
 
-```mdx
+```jsx
 <ListTable className="my-custom-table">
 - - Cell 1
   - Cell 2
@@ -110,7 +110,7 @@ Validation mode for table structure:
 - **`'warn'`** - Logs warnings to console but still renders the table
 - **`'off'`** - Skips validation entirely
 
-```mdx
+```jsx
 <ListTable validation="strict">
 - - Valid table required
   - Or error shown
@@ -124,7 +124,7 @@ Validation mode for table structure:
 
 Optional identifier for debugging purposes. When validation errors occur, the `id` appears in console messages to help identify which table has issues.
 
-```mdx
+```jsx
 <ListTable id="pricing-comparison">
 - - Feature
   - Price
@@ -137,15 +137,15 @@ Console output: `[ListTable id="pricing-comparison"] error: ...`
 
 Note: If both `id` and `caption` are provided, `id` takes precedence in error messages.
 
-## Merged Cell Syntax
+## Merged cell syntax
 
-### Rowspan Marker
+### Rowspan marker
 
 **Syntax**: `[r<number>]`
 
 Spans a cell across multiple rows downward.
 
-```mdx
+```jsx
 <ListTable>
 - - [r2] Spans 2 rows
   - Cell 2
@@ -154,13 +154,13 @@ Spans a cell across multiple rows downward.
 </ListTable>
 ```
 
-### Colspan Marker
+### Colspan marker
 
 **Syntax**: `[c<number>]`
 
 Spans a cell across multiple columns to the right.
 
-```mdx
+```jsx
 <ListTable>
 - - [c2] Spans 2 columns
   - _
@@ -169,13 +169,13 @@ Spans a cell across multiple columns to the right.
 </ListTable>
 ```
 
-### Combined Span
+### Combined span
 
 **Syntax**: `[r<number>c<number>]`
 
 Spans a cell across both rows and columns.
 
-```mdx
+```jsx
 <ListTable>
 - - [r2c2] Spans 2x2
   - _
@@ -197,7 +197,7 @@ Marks a cell position that's occupied by a merged cell. Required for both rowspa
 
 **Important**: Every cell position covered by a span must have a placeholder.
 
-## TypeScript Types
+## TypeScript types
 
 ### ListTableProps
 
@@ -213,7 +213,7 @@ interface ListTableProps {
 }
 ```
 
-### Importing Types
+### Importing types
 
 ```typescript
 import { ListTable } from 'mdx-list-tables';
@@ -224,11 +224,11 @@ const MyTable = (props: Parameters<typeof ListTable>[0]) => {
 };
 ```
 
-## Validation Rules
+## Validation rules
 
 The component validates table structure and provides helpful error messages:
 
-### Invalid Span Values
+### Invalid span values
 
 Detects zero, negative, or non-numeric span values.
 
@@ -236,7 +236,7 @@ Detects zero, negative, or non-numeric span values.
 [ListTable] error: Invalid span value (0) at row 0, col 0
 ```
 
-### Rowspan Overflow
+### Rowspan overflow
 
 Warns if a rowspan extends beyond table bounds.
 
@@ -245,7 +245,7 @@ Warns if a rowspan extends beyond table bounds.
 Table has 4 rows (0-3), but span reaches row 6.
 ```
 
-### Colspan Overflow
+### Colspan overflow
 
 Warns if a colspan extends beyond row width.
 
@@ -254,7 +254,7 @@ Warns if a colspan extends beyond row width.
 Row has 3 columns (0-2), but span reaches column 5.
 ```
 
-### Inconsistent Row Widths
+### Inconsistent row widths
 
 Detects rows with different logical widths.
 
@@ -263,7 +263,7 @@ Detects rows with different logical widths.
 Expected 3 columns but got 2.
 ```
 
-### Missing Placeholders
+### Missing placeholders
 
 Detects if a merged cell doesn't have proper placeholders.
 
@@ -272,7 +272,7 @@ Detects if a merged cell doesn't have proper placeholders.
 but doesn't have enough placeholders in subsequent rows.
 ```
 
-### Orphaned Placeholders
+### Orphaned placeholders
 
 Detects placeholders that don't belong to any merged cell.
 
@@ -281,7 +281,7 @@ Detects placeholders that don't belong to any merged cell.
 doesn't belong to a rowSpan or colSpan.
 ```
 
-## HTML Output
+## HTML output
 
 The component generates semantic HTML tables:
 
@@ -309,7 +309,7 @@ The component generates semantic HTML tables:
 </table>
 ```
 
-### Accessibility Features
+### Accessibility features
 
 - Semantic `<th>` elements with proper `scope` attributes
 - `<caption>` support for table context
@@ -317,14 +317,14 @@ The component generates semantic HTML tables:
 - Valid `rowspan` and `colspan` attributes
 - No ARIA required (semantic HTML handles it)
 
-## Browser Support
+## Browser support
 
 Works in all modern browsers that support:
 - ES2020 JavaScript
 - React 16.8+ (Hooks)
 - Standard table elements
 
-## Framework Compatibility
+## Framework compatibility
 
 Compatible with any framework that supports MDX:
 - Docusaurus

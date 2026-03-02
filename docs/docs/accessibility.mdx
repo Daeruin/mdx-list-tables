@@ -27,12 +27,12 @@ The component uses proper semantic HTML elements without ARIA attributes (which 
 </table>
 ```
 
-## Table Captions
+## Table captions
 
-Always provide a `caption` prop to give context to screen reader users:
+Always provide a `caption` property to give context to screen reader users:
 
-```mdx
-<ListTable caption="Quarterly Sales Report">
+```jsx
+<ListTable caption="Quarterly sales report">
 - - Q1
   - Q2
   - Q3
@@ -42,17 +42,17 @@ Always provide a `caption` prop to give context to screen reader users:
 </ListTable>
 ```
 
-Screen readers announce: "Quarterly Sales Report, table with 2 rows and 3 columns"
+Screen readers announce: "Quarterly sales report, table with 2 rows and 3 columns"
 
-## Header Scope
+## Header scope
 
-The component automatically assigns correct `scope` attributes:
+The component automatically assigns correct `scope` attributes.
 
-### Column Headers
+### Column headers
 
 Use `headerRows` to create column headers with `scope="col"`:
 
-```mdx
+```jsx
 <ListTable headerRows={1}>
 - - Product
   - Price
@@ -71,11 +71,11 @@ Generates:
 </thead>
 ```
 
-### Row Headers
+### Row headers
 
 Use `headerColumns` to create row headers with `scope="row"`:
 
-```mdx
+```jsx
 <ListTable headerColumns={1}>
 - - Widget
   - $10
@@ -94,11 +94,11 @@ Generates:
 </tbody>
 ```
 
-### Both Row and Column Headers
+### Both row and column headers
 
 Combine both for complex tables:
 
-```mdx
+```jsx
 <ListTable headerRows={1} headerColumns={1}>
 - - Product
   - Q1
@@ -114,11 +114,11 @@ Combine both for complex tables:
 
 The top-left cell becomes a header for both row and column headers.
 
-## Merged Cells
+## Merged cells
 
 Screen readers correctly announce merged cells with rowspan/colspan:
 
-```mdx
+```jsx
 <ListTable headerRows={1}>
 - - Month
   - [c2] Revenue
@@ -131,7 +131,7 @@ Screen readers correctly announce merged cells with rowspan/colspan:
 
 Screen reader announcement: "Revenue, column header, spans 2 columns"
 
-## Testing with Screen Readers
+## Testing with screen readers
 
 The component has been tested with:
 
@@ -160,7 +160,7 @@ The component has been tested with:
 - Headers read with content
 - Table context provided
 
-## Keyboard Navigation
+## Keyboard navigation
 
 Standard table keyboard navigation works:
 
@@ -168,44 +168,44 @@ Standard table keyboard navigation works:
 - **Arrow keys** - Navigate cells (screen reader specific)
 - **Home/End** - Jump to row/table boundaries (screen reader specific)
 
-## WCAG Compliance
+## WCAG compliance
 
 The component follows WCAG 2.1 Level AA guidelines:
 
-### 1.3.1 Info and Relationships (Level A)
+### 1.3.1 info and relationships (level A)
 
 - Semantic markup conveys structure
 - Table relationships programmatically determined
 - Headers properly associated with data cells
 
-### 1.3.2 Meaningful Sequence (Level A)
+### 1.3.2 meaningful sequence (level A)
 
 - Reading order follows visual layout
 - Nested lists parse to logical table structure
 
-### 4.1.1 Parsing (Level A)
+### 4.1.1 parsing (level A)
 
 - Valid HTML table structure
 - No duplicate IDs
-- Proper nesting of elements
+-  Proper nesting of elements
 
-### 4.1.2 Name, Role, Value (Level A)
+### 4.1.2 name, role, value (level A)
 
 - Native HTML semantics (no custom roles needed)
 - Table, row, cell roles implicit
 - Headers have accessible names
 
-## Color and Contrast
+## Color and contrast
 
 The component renders unstyled tables. When adding CSS:
 
-### Text Contrast
+### Text contrast
 
 Ensure text meets minimum contrast ratios:
 - **Normal text**: 4.5:1 minimum
 - **Large text** (18pt+): 3:1 minimum
 
-### Focus Indicators
+### Focus indicators
 
 Provide visible focus styles for keyboard users:
 
@@ -217,11 +217,11 @@ Provide visible focus styles for keyboard users:
 }
 ```
 
-### Don't Rely on Color Alone
+### Don't rely on color alone
 
 Use additional visual cues beyond color:
 
-```mdx
+```jsx
 <!-- Good: Icon + color -->
 <ListTable>
 - - Status
@@ -232,10 +232,10 @@ Use additional visual cues beyond color:
   - 0%
 </ListTable>
 
-<!-- Bad: Color only (not in MDX) -->
+<!-- Bad: color only (not in MDX) -->
 ```
 
-## Best Practices
+## Best practices
 
 ### Do
 
@@ -253,7 +253,7 @@ Use additional visual cues beyond color:
 - Don't use empty header cells (fails axe audit)
 - Don't rely on visual formatting alone
 
-## Automated Testing
+## Automated testing
 
 The component passes axe-core accessibility audits:
 
@@ -269,13 +269,13 @@ test('table has no accessibility violations', async () => {
 
 All built-in examples pass axe-core with zero violations.
 
-## Complex Tables
+## Complex tables
 
 For very complex tables with multiple header levels:
 
 ### Use headerRows for stacked headers
 
-```mdx
+```jsx
 <ListTable headerRows={2}>
 - - Product
   - [c2] Q1
@@ -298,21 +298,21 @@ If a table has more than 2 levels of headers, consider:
 - Using a different visualization (chart, list)
 - Providing a text summary alongside the table
 
-## Screen Reader Specific Features
+## Screen reader specific features
 
-### Table Summary
+### Table summary
 
 Screen readers announce table dimensions:
 > "Table with 5 rows and 3 columns"
 
-### Navigate by Header
+### Navigate by header
 
 Screen readers can jump between headers:
 - **T** key (NVDA/JAWS) - Jump to next table
 - **Ctrl+Alt+Arrow** (NVDA) - Navigate table cells
 - **VO+Arrow** (VoiceOver) - Navigate table cells
 
-### Reading Strategy
+### Reading strategy
 
 Screen readers offer multiple reading modes:
 - Read all content sequentially
@@ -320,13 +320,13 @@ Screen readers offer multiple reading modes:
 - List all headers
 - Jump to specific row/column
 
-## Common Accessibility Issues
+## Common accessibility issues
 
-### Empty Headers
+### Empty headers
 
 Don't leave header cells empty:
 
-```mdx
+```jsx
 <!-- Bad -->
 <ListTable headerRows={1} headerColumns={1}>
 - - ← Empty header
@@ -346,11 +346,11 @@ Don't leave header cells empty:
 
 Empty headers fail axe-core audits.
 
-### Missing Caption
+### Missing caption
 
 Provide context with captions:
 
-```mdx
+```jsx
 <!-- Bad: No context -->
 <ListTable>
 - - Q1
@@ -360,7 +360,7 @@ Provide context with captions:
 </ListTable>
 
 <!-- Good: Clear context -->
-<ListTable caption="Quarterly Revenue (in thousands)">
+<ListTable caption="Quarterly revenue (in thousands)">
 - - Q1
   - Q2
 - - $100k
@@ -368,11 +368,11 @@ Provide context with captions:
 </ListTable>
 ```
 
-### Layout Tables
+### Layout tables
 
 Don't use ListTable for layout. Use CSS instead.
 
-## Further Reading
+## Further reading
 
 - [MDN: HTML Table Accessibility](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced#Tables_for_visually_impaired_users)
 - [WCAG 2.1 Tables](https://www.w3.org/WAI/tutorials/tables/)

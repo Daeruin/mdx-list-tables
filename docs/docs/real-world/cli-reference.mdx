@@ -1,0 +1,462 @@
+---
+sidebar_position: 2
+---
+
+# CLI and configuration reference
+
+Command-line tools, configuration files, and environment variable documentation.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## CLI command reference
+
+<ListTable headerRows={1} caption="build-tool CLI commands" validation="strict">
+- - Command
+  - Options
+  - Description
+  - Examples
+- - `build-tool init`
+  - `--template <name>`
+    Template to use (react, vue, vanilla)
+
+    `--typescript`
+    Enable TypeScript (default: false)
+
+    `--package-manager <pm>`
+    npm, yarn, or pnpm (default: npm)
+
+    `--git`
+    Initialize git repository (default: true)
+  - Initialize a new project in current directory
+  - ```bash
+    # React with TypeScript
+    build-tool init \
+      --template react \
+      --typescript
+
+    # Vue with pnpm
+    build-tool init \
+      --template vue \
+      --package-manager pnpm
+    ```
+- - `build-tool dev`
+  - `--port <number>`
+    Development server port (default: 3000)
+
+    `--host <hostname>`
+    Bind to specific host (default: localhost)
+
+    `--open`
+    Open browser automatically (default: false)
+
+    `--https`
+    Use HTTPS with self-signed cert (default: false)
+  - Start development server with hot reload
+  - ```bash
+    # Standard dev server
+    build-tool dev
+
+    # Custom port with HTTPS
+    build-tool dev \
+      --port 8080 \
+      --https \
+      --open
+    ```
+- - `build-tool build`
+  - `--output-dir <path>`
+    Output directory (default: dist)
+
+    `--mode <env>`
+    Build mode: production, development (default: production)
+
+    `--sourcemap`
+    Generate source maps (default: false)
+
+    `--minify`
+    Minify output (default: true in production)
+
+    `--analyze`
+    Generate bundle analysis report (default: false)
+  - Build project for production deployment
+  - ```bash
+    # Production build
+    build-tool build
+
+    # Development build with maps
+    build-tool build \
+      --mode development \
+      --sourcemap
+
+    # Analyze bundle size
+    build-tool build --analyze
+    ```
+- - `build-tool test`
+  - `--watch`
+    Watch mode (default: false)
+
+    `--coverage`
+    Generate coverage report (default: false)
+
+    `--ui`
+    Launch interactive UI (default: false)
+
+    `--reporter <name>`
+    Reporter: default, verbose, json, html (default: default)
+
+    `--run`
+    Run tests once and exit (no watch)
+  - Run test suite with Vitest
+  - ```bash
+    # Watch mode
+    build-tool test
+
+    # Coverage report
+    build-tool test \
+      --coverage \
+      --reporter html
+
+    # CI mode
+    build-tool test --run
+    ```
+- - `build-tool lint`
+  - `--fix`
+    Automatically fix problems (default: false)
+
+    `--quiet`
+    Report errors only (default: false)
+
+    `--format <name>`
+    Output format: stylish, json, compact (default: stylish)
+
+    `--max-warnings <n>`
+    Fail if warnings exceed threshold (default: -1)
+  - Run ESLint on source files
+  - ```bash
+    # Check for issues
+    build-tool lint
+
+    # Auto-fix issues
+    build-tool lint --fix
+
+    # CI mode: fail on warnings
+    build-tool lint \
+      --max-warnings 0
+    ```
+</ListTable>
+
+**MDX source**
+
+````jsx
+<ListTable headerRows={1} caption="build-tool CLI commands" validation="strict">
+- - Command
+  - Options
+  - Description
+  - Examples
+- - `build-tool init`
+  - `--template <name>`
+    Template to use (react, vue, vanilla)
+
+    `--typescript`
+    Enable TypeScript (default: false)
+
+    `--package-manager <pm>`
+    npm, yarn, or pnpm (default: npm)
+
+    `--git`
+    Initialize git repository (default: true)
+  - Initialize a new project in current directory
+  - ```bash
+    # React with TypeScript
+    build-tool init \
+      --template react \
+      --typescript
+
+    # Vue with pnpm
+    build-tool init \
+      --template vue \
+      --package-manager pnpm
+    ```
+...
+</ListTable>
+````
+
+## Configuration file reference
+
+<ListTable headerRows={1} caption="build-tool.config.js options" validation="strict">
+- - Option
+  - Type
+  - Default
+  - Description
+- - `root`
+  - `string`
+  - `process.cwd()`
+  - Project root directory
+- - `build.outDir`
+  - `string`
+  - `'dist'`
+  - Output directory for production build
+- - `build.sourcemap`
+  - `boolean \| 'inline' \| 'hidden'`
+  - `false`
+  - Generate source maps:
+    - `true`: Separate .map files
+    - `'inline'`: Inline data URIs
+    - `'hidden'`: Generate but don't reference
+    - `false`: No source maps
+- - `build.minify`
+  - `boolean \| 'terser' \| 'esbuild'`
+  - `'esbuild'`
+  - Minification strategy:
+    - `'terser'`: Better compression, slower
+    - `'esbuild'`: Faster, good compression
+    - `false`: Disable minification
+- - `build.target`
+  - `string \| string[]`
+  - `'esnext'`
+  - Browser compatibility target (esbuild format)
+
+    Examples: `'es2015'`, `'chrome90'`, `['chrome90', 'firefox88']`
+- - `server.port`
+  - `number`
+  - `3000`
+  - Dev server port
+- - `server.host`
+  - `string \| boolean`
+  - `'localhost'`
+  - Dev server host:
+    - `'localhost'`: Local only
+    - `'0.0.0.0'` or `true`: Network accessible
+    - `false`: Don't listen
+- - `server.https`
+  - `boolean \| object`
+  - `false`
+  - HTTPS configuration:
+    - `true`: Self-signed cert
+    - `{key, cert}`: Custom certificates
+    - `false`: HTTP only
+- - `server.proxy`
+  - `object`
+  - `{}`
+  - Proxy configuration for API requests
+
+    ```js
+    {
+      '/api': 'http://localhost:8080',
+      '/ws': {
+        target: 'ws://localhost:8080',
+        ws: true
+      }
+    }
+    ```
+- - `plugins`
+  - `Plugin[]`
+  - `[]`
+  - Build plugins array
+
+    ```js
+    import react from '@vitejs/plugin-react'
+    export default {
+      plugins: [react()]
+    }
+    ```
+- - `resolve.alias`
+  - `object`
+  - `{}`
+  - Path aliases for imports
+
+    ```js
+    {
+      '@': '/src',
+      '@components': '/src/components'
+    }
+    ```
+- - `css.modules`
+  - `object`
+  - `{}`
+  - CSS modules configuration
+
+    ```js
+    {
+      scopeBehaviour: 'local',
+      generateScopedName: '[name]_[local]_[hash:base64:5]'
+    }
+    ```
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="build-tool.config.js options" validation="strict">
+- - Option
+  - Type
+  - Default
+  - Description
+- - `root`
+  - `string`
+  - `process.cwd()`
+  - Project root directory
+- - `build.outDir`
+  - `string`
+  - `'dist'`
+  - Output directory for production build
+- - `build.sourcemap`
+  - `boolean \| 'inline' \| 'hidden'`
+  - `false`
+  - Generate source maps:
+    - `true`: Separate .map files
+    - `'inline'`: Inline data URIs
+    - `'hidden'`: Generate but don't reference
+    - `false`: No source maps
+...
+</ListTable>
+```
+## Environment variables reference
+
+<ListTable headerRows={1} headerColumns={1} caption="Environment variables" validation="strict">
+- - Variable
+  - Required
+  - Description
+  - Example
+- - `NODE_ENV`
+  - No
+  - Application environment
+
+    **Values:**
+    - `development`: Dev mode with debugging
+    - `production`: Production mode, optimized
+    - `test`: Test environment
+
+    **Default:** `development`
+  - `production`
+- - `API_BASE_URL`
+  - Yes
+  - Base URL for backend API
+
+    **Format:** Full URL with protocol
+
+    **Security:** Should use HTTPS in production
+  - `https://api.example.com`
+- - `DATABASE_URL`
+  - Yes
+  - PostgreSQL connection string
+
+    **Format:** `postgresql://user:password@host:port/database`
+
+    **Security:** Store in secrets manager, never commit to git
+  - `postgresql://app:secret@db.example.com:5432/myapp`
+- - `REDIS_URL`
+  - No
+  - Redis connection string for caching
+
+    **Format:** `redis://[[username:]password@]host[:port][/database]`
+
+    **Default:** `redis://localhost:6379`
+  - `redis://:password@cache.example.com:6379/0`
+- - `LOG_LEVEL`
+  - No
+  - Application logging verbosity
+
+    **Values:** `error`, `warn`, `info`, `debug`, `trace`
+
+    **Default:** `info`
+
+    **Note:** Use `error` or `warn` in production
+  - `info`
+- - `ENABLE_ANALYTICS`
+  - No
+  - Enable analytics tracking
+
+    **Values:** `true`, `false`, `1`, `0`
+
+    **Default:** `false`
+
+    **Privacy:** Respect user consent laws (GDPR, CCPA)
+  - `true`
+- - `MAX_REQUEST_SIZE`
+  - No
+  - Maximum HTTP request body size
+
+    **Format:** Number with unit (kb, mb, gb)
+
+    **Default:** `1mb`
+
+    **Security:** Prevent DoS attacks with reasonable limits
+  - `10mb`
+- - `SESSION_SECRET`
+  - Yes
+  - Secret key for session encryption
+
+    **Security:**
+    - Minimum 32 random characters
+    - Generate with: `openssl rand -base64 32`
+    - Rotate periodically
+    - Never commit to git
+  - `k9KpqE7vF2mR8nH3wJ5cX1bN4zL6sT0y`
+- - `CORS_ORIGIN`
+  - No
+  - Allowed CORS origins (comma-separated)
+
+    **Format:** Full URLs or `*` for all
+
+    **Security:** Never use `*` in production
+
+    **Default:** Same origin only
+  - `https://example.com,https://www.example.com`
+- - `RATE_LIMIT_WINDOW`
+  - No
+  - Rate limit window duration
+
+    **Format:** Number with unit (s, m, h)
+
+    **Default:** `15m`
+
+    **Related:** Use with `RATE_LIMIT_MAX`
+  - `15m`
+- - `RATE_LIMIT_MAX`
+  - No
+  - Maximum requests per window
+
+    **Default:** `100`
+
+    **Tuning:** Adjust based on API usage patterns
+  - `100`
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} headerColumns={1} caption="Environment variables" validation="strict">
+- - Variable
+  - Required
+  - Description
+  - Example
+- - `NODE_ENV`
+  - No
+  - Application environment
+
+    **Values:**
+    - `development`: Dev mode with debugging
+    - `production`: Production mode, optimized
+    - `test`: Test environment
+
+    **Default:** `development`
+  - `production`
+- - `API_BASE_URL`
+  - Yes
+  - Base URL for backend API
+
+    **Format:** Full URL with protocol
+
+    **Security:** Should use HTTPS in production
+  - `https://api.example.com`
+- - `DATABASE_URL`
+  - Yes
+  - PostgreSQL connection string
+
+    **Format:** `postgresql://user:password@host:port/database`
+
+    **Security:** Store in secrets manager, never commit to git
+  - `postgresql://app:secret@db.example.com:5432/myapp`
+...
+</ListTable>
+```

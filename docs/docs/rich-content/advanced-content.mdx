@@ -1,0 +1,212 @@
+---
+sidebar_position: 3
+---
+
+# Images, admonitions, and block quotes
+
+ListTable supports rich content types that standard Markdown tables cannot handle.
+
+import { ListTable } from '@site/src/components/ListTable';
+
+## Images in cells
+
+Unlike standard Markdown tables, ListTable cells can contain images, icons, and diagrams.
+
+<ListTable headerRows={1} headerColumns={1} caption="HTTP status code categories" validation="strict">
+- - Code range
+  - Icon
+  - Category
+  - Description
+- - 2xx
+  - ![Success icon](/img/docusaurus-official.svg)
+  - Success
+  - Request succeeded
+- - 3xx
+  - ![Redirect icon](/img/docusaurus-official.svg)
+  - Redirection
+  - Further action needed
+- - 4xx
+  - ![Client error icon](/img/docusaurus-official.svg)
+  - Client error
+  - Request contains bad syntax
+- - 5xx
+  - ![Server error icon](/img/docusaurus-official.svg)
+  - Server error
+  - Server failed to fulfill valid request
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} headerColumns={1} caption="HTTP status code categories" validation="strict">
+- - Code range
+  - Icon
+  - Category
+  - Description
+- - 2xx
+  - ![Success icon](/img/success.svg)
+  - Success
+  - Request succeeded
+- - 3xx
+  - ![Redirect icon](/img/redirect.svg)
+  - Redirection
+  - Further action needed
+...
+</ListTable>
+```
+
+## Admonitions in cells
+
+Docusaurus admonitions (tip, info, warning, danger) work perfectly in ListTable cells.
+
+<ListTable headerRows={1} caption="Build configuration options" validation="strict">
+- - Option
+  - Description
+  - Notes
+- - `production`
+  - Optimized build for deployment
+  - :::tip
+    Enable source maps for easier debugging in production
+    :::
+- - `development`
+  - Fast rebuild with hot reload
+  - :::info
+    Development mode includes helpful warnings and error messages
+    :::
+- - `test`
+  - Configured for running tests
+  - :::warning
+    Test mode may have different environment variables than production
+    :::
+- - `debug`
+  - Verbose logging enabled
+  - :::danger
+    Never deploy with debug mode enabled - exposes sensitive information
+    :::
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Build configuration options" validation="strict">
+- - Option
+  - Description
+  - Notes
+- - `production`
+  - Optimized build for deployment
+  - :::tip
+    Enable source maps for easier debugging
+    :::
+- - `development`
+  - Fast rebuild with hot reload
+  - :::info
+    Development mode includes helpful warnings
+    :::
+</ListTable>
+```
+
+## Block quotes in cells
+
+Use block quotes for testimonials, quotes, or emphasized text.
+
+<ListTable headerRows={1} caption="Design system principles" validation="strict">
+- - Principle
+  - Description
+  - Quote
+- - Consistency
+  - Use established patterns throughout
+  - > "Consistency is one of the most powerful usability principles: when things always behave the same, users don't have to worry about what will happen."
+    >
+    > — Jakob Nielsen
+- - Feedback
+  - Inform users about system state
+  - > "The system should always keep users informed about what is going on, through appropriate feedback within reasonable time."
+    >
+    > — Nielsen Norman Group
+- - Simplicity
+  - Minimize cognitive load
+  - > "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away."
+    >
+    > — Antoine de Saint-Exupéry
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Design system principles" validation="strict">
+- - Principle
+  - Description
+  - Quote
+- - Consistency
+  - Use established patterns throughout
+  - > "Consistency is one of the most powerful usability principles..."
+    >
+    > — Jakob Nielsen
+- - Feedback
+  - Inform users about system state
+  - > "The system should always keep users informed..."
+    >
+    > — Nielsen Norman Group
+</ListTable>
+```
+
+## Combined rich content
+
+Combine multiple content types in a single table for maximum expressiveness.
+
+<ListTable headerRows={1} caption="Database migration strategies" validation="strict">
+- - Strategy
+  - When to use
+  - Example
+  - Caution
+- - Blue-green deployment
+  - Zero-downtime migrations
+  - ![Diagram](/img/docusaurus-official.svg)
+
+    Run two identical environments:
+    - Blue (current version)
+    - Green (new version)
+
+    Switch traffic after validation
+  - :::warning
+    Requires 2x infrastructure during migration
+    :::
+- - Rolling migration
+  - Gradual feature rollout
+  - > "We migrated 50 million users over 6 weeks without a single outage."
+    >
+    > — Platform Engineer, TechCorp
+  - :::tip
+    Monitor error rates carefully during rollout
+    :::
+- - Big bang migration
+  - Small databases or maintenance windows
+  - **Steps:**
+    1. Take full backup
+    2. Put application in maintenance mode
+    3. Run migration scripts
+    4. Verify data integrity
+    5. Bring application back online
+  - :::danger
+    High risk - only use for non-critical systems or when downtime is acceptable
+    :::
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Database migration strategies" validation="strict">
+- - Strategy
+  - When to use
+  - Example
+  - Caution
+- - Blue-green deployment
+  - Zero-downtime migrations
+  - ![Diagram](/img/blue-green.svg)
+
+    Run two identical environments...
+  - :::warning
+    Requires 2x infrastructure
+    :::
+</ListTable>
+```

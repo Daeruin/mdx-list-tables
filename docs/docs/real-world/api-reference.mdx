@@ -1,0 +1,396 @@
+---
+sidebar_position: 1
+---
+
+# API reference documentation
+
+Comprehensive API endpoint documentation with complex parameter descriptions and examples.
+
+import { ListTable } from '@site/src/components/ListTable';
+import CodeBlock from '@theme/CodeBlock';
+
+## REST API endpoints
+
+<ListTable headerRows={1} headerColumns={1} caption="User management API v2" validation="strict">
+- - Endpoint
+  - Method
+  - Parameters
+  - Response
+  - Authentication
+- - `/api/v2/users`
+  - GET
+  - **Query params:**
+    - `page` (integer): Page number (default: 1)
+    - `limit` (integer): Items per page (default: 20, max: 100)
+    - `sort` (string): Sort field (name, email, created_at)
+    - `order` (string): Sort direction (asc, desc)
+    - `role` (string): Filter by role (admin, user, guest)
+    - `active` (boolean): Filter by active status
+  - **200 OK**
+    ```json
+    {
+      "users": [...],
+      "total": 150,
+      "page": 1,
+      "pages": 8
+    }
+    ```
+  - API key required
+- - `/api/v2/users/:id`
+  - GET
+  - **Path params:**
+    - `id` (UUID): User identifier
+
+    **Query params:**
+    - `include` (string): Related resources to include (profile, settings, permissions)
+  - **200 OK**
+    ```json
+    {
+      "id": "uuid",
+      "name": "...",
+      "email": "..."
+    }
+    ```
+
+    **404 Not Found**
+    User does not exist
+  - Bearer token or API key
+- - `/api/v2/users`
+  - POST
+  - **Request body:**
+    ```json
+    {
+      "name": "string",
+      "email": "string",
+      "password": "string",
+      "role": "user|admin"
+    }
+    ```
+
+    **Validation:**
+    - Email must be unique
+    - Password min 12 chars
+    - Role optional (default: user)
+  - **201 Created**
+    ```json
+    {
+      "id": "uuid",
+      "name": "...",
+      "token": "..."
+    }
+    ```
+
+    **400 Bad Request**
+    Validation errors
+
+    **409 Conflict**
+    Email already exists
+  - API key (admin only)
+- - `/api/v2/users/:id`
+  - PATCH
+  - **Path params:**
+    - `id` (UUID): User identifier
+
+    **Request body:**
+    ```json
+    {
+      "name": "string",
+      "email": "string",
+      "role": "string"
+    }
+    ```
+
+    All fields optional (partial update)
+  - **200 OK**
+    Updated user object
+
+    **403 Forbidden**
+    Insufficient permissions
+
+    **404 Not Found**
+    User does not exist
+  - Bearer token (self or admin)
+- - `/api/v2/users/:id`
+  - DELETE
+  - **Path params:**
+    - `id` (UUID): User identifier
+
+    **Query params:**
+    - `hard` (boolean): Permanently delete vs soft delete (default: false)
+  - **204 No Content**
+    Deletion successful
+
+    **403 Forbidden**
+    Cannot delete own account
+
+    **404 Not Found**
+    User does not exist
+  - Bearer token (admin only)
+</ListTable>
+
+**MDX source**
+
+````jsx
+<ListTable headerRows={1} headerColumns={1} caption="User management API v2">
+- - Endpoint
+  - Method
+  - Parameters
+  - Response
+  - Authentication
+- - `/api/v2/users`
+  - GET
+  - **Query params:**
+    - `page` (integer): Page number (default: 1)
+    - `limit` (integer): Items per page (default: 20, max: 100)
+    - `sort` (string): Sort field (name, email, created_at)
+    - `order` (string): Sort direction (asc, desc)
+    - `role` (string): Filter by role (admin, user, guest)
+    - `active` (boolean): Filter by active status
+  - **200 OK**
+    ```json
+    {
+      "users": [...],
+      "total": 150,
+      "page": 1,
+      "pages": 8
+    }
+    ```
+  - API key required
+- - `/api/v2/users/:id`
+  - GET
+  - **Path params:**
+    - `id` (UUID): User identifier
+
+    **Query params:**
+    - `include` (string): Related resources to include (profile, settings, permissions)
+  - **200 OK**
+    ```json
+    {
+      "id": "uuid",
+      "name": "...",
+      "email": "..."
+    }
+    ```
+
+    **404 Not Found**
+    User does not exist
+  - Bearer token or API key
+...
+</ListTable>
+````
+
+## GraphQL schema reference
+
+<ListTable headerRows={1} caption="GraphQL type definitions" validation="strict">
+- - Type
+  - Fields
+  - Description
+  - Example query
+- - `User`
+  - **Fields:**
+    - `id: ID!`
+    - `name: String!`
+    - `email: String!`
+    - `role: Role!`
+    - `createdAt: DateTime!`
+    - `updatedAt: DateTime!`
+    - `posts: [Post!]!`
+    - `comments: [Comment!]!`
+  - Represents a registered user in the system
+  - ```graphql
+    query {
+      user(id: "123") {
+        name
+        email
+        posts {
+          title
+        }
+      }
+    }
+    ```
+- - `Post`
+  - **Fields:**
+    - `id: ID!`
+    - `title: String!`
+    - `content: String!`
+    - `published: Boolean!`
+    - `author: User!`
+    - `tags: [String!]!`
+    - `createdAt: DateTime!`
+    - `comments: [Comment!]!`
+  - Blog post or article content
+  - ```graphql
+    query {
+      posts(
+        first: 10
+        published: true
+      ) {
+        title
+        author {
+          name
+        }
+      }
+    }
+    ```
+- - `Comment`
+  - **Fields:**
+    - `id: ID!`
+    - `content: String!`
+    - `author: User!`
+    - `post: Post!`
+    - `createdAt: DateTime!`
+    - `replies: [Comment!]!`
+  - User comment on a post (supports threading)
+  - ```graphql
+    mutation {
+      createComment(
+        postId: "456"
+        content: "Great!"
+      ) {
+        id
+        author {
+          name
+        }
+      }
+    }
+    ```
+</ListTable>
+
+**MDX source**
+
+````jsx
+<ListTable headerRows={1} caption="GraphQL type definitions" validation="strict">
+- - Type
+  - Fields
+  - Description
+  - Example query
+- - `User`
+  - **Fields:**
+    - `id: ID!`
+    - `name: String!`
+    - `email: String!`
+    - `role: Role!`
+    - `createdAt: DateTime!`
+    - `updatedAt: DateTime!`
+    - `posts: [Post!]!`
+    - `comments: [Comment!]!`
+  - Represents a registered user in the system
+  - ```graphql
+    query {
+      user(id: "123") {
+        name
+        email
+        posts {
+          title
+        }
+      }
+    }
+    ```
+...
+</ListTable>
+````
+
+## Webhook event reference
+
+<ListTable headerRows={1} headerColumns={1} caption="Webhook event types" validation="strict">
+- - Event
+  - Payload
+  - Triggers when
+  - Retry policy
+- - `user.created`
+  - ```json
+    {
+      "event": "user.created",
+      "user": {
+        "id": "uuid",
+        "name": "...",
+        "email": "..."
+      },
+      "timestamp": "ISO8601"
+    }
+    ```
+  - New user registration completed
+  - 3 retries with exponential backoff (1s, 2s, 4s)
+- - `user.updated`
+  - ```json
+    {
+      "event": "user.updated",
+      "user": {...},
+      "changes": {
+        "name": {
+          "old": "...",
+          "new": "..."
+        }
+      },
+      "timestamp": "ISO8601"
+    }
+    ```
+  - User profile or settings changed
+  - 3 retries with exponential backoff
+- - `user.deleted`
+  - ```json
+    {
+      "event": "user.deleted",
+      "userId": "uuid",
+      "deletedBy": "uuid",
+      "timestamp": "ISO8601"
+    }
+    ```
+  - User account permanently deleted
+  - 5 retries (critical event)
+- - `payment.succeeded`
+  - ```json
+    {
+      "event": "payment.succeeded",
+      "payment": {
+        "id": "...",
+        "amount": 2999,
+        "currency": "USD",
+        "userId": "uuid"
+      },
+      "timestamp": "ISO8601"
+    }
+    ```
+  - Payment processed successfully
+  - 5 retries (critical event)
+- - `payment.failed`
+  - ```json
+    {
+      "event": "payment.failed",
+      "payment": {...},
+      "error": {
+        "code": "...",
+        "message": "..."
+      },
+      "timestamp": "ISO8601"
+    }
+    ```
+  - Payment processing failed
+  - 5 retries (critical event)
+</ListTable>
+
+**MDX source**
+
+````jsx
+<ListTable headerRows={1} headerColumns={1} caption="Webhook event types" validation="strict">
+- - Event
+  - Payload
+  - Triggers when
+  - Retry policy
+- - `user.created`
+  - ```json
+    {
+      "event": "user.created",
+      "user": {
+        "id": "uuid",
+        "name": "...",
+        "email": "..."
+      },
+      "timestamp": "ISO8601"
+    }
+    ```
+  - New user registration completed
+  - 3 retries with exponential backoff (1s, 2s, 4s)
+...
+</ListTable>
+````

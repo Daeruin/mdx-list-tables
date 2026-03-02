@@ -2,13 +2,13 @@
 sidebar_position: 5
 ---
 
-# Validation Modes
+# Validation modes
 
 The `validation` prop controls how strictly the component checks for proper placeholder usage and table structure.
 
 import { ListTable } from '@site/src/components/ListTable';
 
-## Validation Levels
+## Validation levels
 
 The ListTable component supports three validation modes:
 
@@ -16,11 +16,11 @@ The ListTable component supports three validation modes:
 - **`'warn'`** (default) - Tables render normally but log warnings to the console
 - **`'off'`** - No validation, allows flexible syntax without placeholders
 
-## Strict Mode
+## Strict mode
 
 In strict mode, tables with structural issues will show an error message instead of rendering. This is useful during development to catch mistakes early.
 
-<ListTable headerRows={1} validation="strict" caption="Strict Validation Example">
+<ListTable headerRows={1} validation="strict" caption="Strict validation example">
 - - Name
   - [c2] Info
   - _
@@ -35,9 +35,10 @@ In strict mode, tables with structural issues will show an error message instead
   - 555-0200
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} validation="strict" caption="Strict Validation Example">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} validation="strict" caption="Strict validation example">
 - - Name
   - [c2] Info
   - _
@@ -53,13 +54,51 @@ In strict mode, tables with structural issues will show an error message instead
 </ListTable>
 ```
 
-In this example, the table has proper structure with all required placeholders, so it renders successfully even in strict mode.
+In this example, strict validation indicates that there's a placeholder in row 2, column 1, that doesn't belong two a rowSpan or colSpan. With strict validation, placeholders must match up to a corresponding rowSpan or colSpan.
 
-## Warn Mode (Default)
+![Illustration of which placeholder doesn't belong to any colSpan or rowSpan](/img/validation-orphan-placeholder.png)
+
+To fix this instance, you could add an `[r2]` rowSpan to row 1, column 1 ("Name"). For this fix to work you would also need to set `headerRows` to 2 so that row 1 could legitimately span onto another header row (row 2).
+
+<ListTable headerRows={2} validation="strict" caption="Strict validation example">
+- - [r2] Name
+  - [c2] Info
+  - _
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+- - Bob
+  - bob@example.com
+  - 555-0200
+</ListTable>
+
+**MDX source**
+
+```jsx
+<ListTable headerRows={2} validation="strict" caption="Strict validation example">
+- - [r2] Name
+  - [c2] Info
+  - _
+- - _
+  - Email
+  - Phone
+- - Alice
+  - alice@example.com
+  - 555-0100
+- - Bob
+  - bob@example.com
+  - 555-0200
+</ListTable>
+```
+
+## Warn mode (default)
 
 Warn mode is the default validation level. Tables will render normally, but structural issues are logged to the browser console. This is the recommended setting for production.
 
-<ListTable headerRows={1} caption="Warn Mode Example">
+<ListTable headerRows={1} caption="Warn mode example">
 - - Name
   - [c2] Info
   - _
@@ -71,9 +110,10 @@ Warn mode is the default validation level. Tables will render normally, but stru
   - 555-0100
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Warn Mode Example">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Warn mode example">
 - - Name
   - [c2] Info
   - _
@@ -86,13 +126,17 @@ Warn mode is the default validation level. Tables will render normally, but stru
 </ListTable>
 ```
 
-Check the browser console to see any validation warnings. Even if there are issues, the table will attempt to render.
+Check the browser console to see any validation warnings. As an example, the table above causes Chrome developer tools to show the following message in the console:
 
-## Off Mode
+`[ListTable caption="Warn mode example"] error: Placeholder found that doesn't belong to a rowSpan or colSpan. Row 2`
+
+Even if there are issues, the table will attempt to render.
+
+## Off mode
 
 With validation turned off, you can use more flexible syntax. This is useful when you want simpler markdown without worrying about exact placeholder placement.
 
-<ListTable headerRows={1} validation="off" caption="Flexible Syntax">
+<ListTable headerRows={1} validation="off" caption="Flexible syntax">
 - - Name
   - [c2] Contact Info
 - - _
@@ -106,9 +150,9 @@ With validation turned off, you can use more flexible syntax. This is useful whe
   - 555-0200
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} validation="off" caption="Flexible Syntax">
+**MDX source**
+```jsx
+<ListTable headerRows={1} validation="off" caption="Flexible syntax">
 - - Name
   - [c2] Contact Info
 - - _
@@ -123,14 +167,15 @@ With validation turned off, you can use more flexible syntax. This is useful whe
 </ListTable>
 ```
 
-Notice how in "off" mode, we didn't need to add the trailing placeholder `_` after `[c2] Contact Info` in the first row. The component is more forgiving about placeholder placement.
+Notice how in "off" mode, we didn't need to add the trailing placeholder `_` after `[c2] Contact Info` in the first row. In addition, no messages are logged to the browser console about this table. The component is more forgiving about placeholder placement.
 
-## Comparison Example
+## Comparison example
 
 Here's the same table structure rendered with all three validation modes:
 
-### Strict Mode
-<ListTable headerRows={1} validation="strict" caption="Team Contact List (Strict)">
+### Strict mode
+
+<ListTable headerRows={1} validation="strict" caption="Team contact list (strict)">
 - - Team
   - [c2] Contact Methods
   - _
@@ -145,8 +190,9 @@ Here's the same table structure rendered with all three validation modes:
   - ext. 200
 </ListTable>
 
-### Warn Mode
-<ListTable headerRows={1} caption="Team Contact List (Warn)">
+### Warn mode
+
+<ListTable headerRows={1} caption="Team contact list (warn)">
 - - Team
   - [c2] Contact Methods
   - _
@@ -161,8 +207,9 @@ Here's the same table structure rendered with all three validation modes:
   - ext. 200
 </ListTable>
 
-### Off Mode
-<ListTable headerRows={1} validation="off" caption="Team Contact List (Off)">
+### Off mode
+
+<ListTable headerRows={1} validation="off" caption="Team contact list (off)">
 - - Team
   - [c2] Contact Methods
 - - _
@@ -176,9 +223,10 @@ Here's the same table structure rendered with all three validation modes:
   - ext. 200
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} validation="strict" caption="Team Contact List (Strict)">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} validation="strict" caption="Team contact list (strict)">
 - - Team
   - [c2] Contact Methods
   - _
@@ -188,7 +236,7 @@ Here's the same table structure rendered with all three validation modes:
 ...
 </ListTable>
 
-<ListTable headerRows={1} caption="Team Contact List (Warn)">
+<ListTable headerRows={1} caption="Team contact list (warn)">
 - - Team
   - [c2] Contact Methods
   - _
@@ -198,7 +246,7 @@ Here's the same table structure rendered with all three validation modes:
 ...
 </ListTable>
 
-<ListTable headerRows={1} validation="off" caption="Team Contact List (Off)">
+<ListTable headerRows={1} validation="off" caption="Team contact list (off)">
 - - Team
   - [c2] Contact Methods
 - - _
@@ -208,7 +256,7 @@ Here's the same table structure rendered with all three validation modes:
 </ListTable>
 ```
 
-## When to Use Each Mode
+## When to use each mode
 
 - **Strict**: Use during development to catch structural errors early. Best for ensuring table correctness before deployment.
 - **Warn**: Use in production. Provides helpful debugging information without breaking the page.

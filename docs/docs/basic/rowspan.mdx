@@ -2,15 +2,15 @@
 sidebar_position: 2
 ---
 
-# Rowspan Examples
+# Rowspan examples
 
-Use `[r2]`, `[r3]`, etc. to make cells span multiple rows. Use `_` as a placeholder in subsequent rows.
+Use `[r2]`, `[r3]`, etc. to make cells span multiple rows. Use `_` as a placeholder in following rows.
 
 import { ListTable } from '@site/src/components/ListTable';
 
-## Simple Rowspan
+## Simple rowspan
 
-<ListTable headerRows={1} caption="Products with Categories">
+<ListTable headerRows={1} caption="Products with categories" validation="strict">
 - - Category
   - Product
   - Price
@@ -28,9 +28,10 @@ import { ListTable } from '@site/src/components/ListTable';
   - $45
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Products with Categories">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Products with categories">
 - - Category
   - Product
   - Price
@@ -50,15 +51,15 @@ import { ListTable } from '@site/src/components/ListTable';
 ```
 
 **Key Points:**
-- `[r2]` in the "Electronics" cell makes it span 2 rows
+- `[r2]` in the "Electronics" cell makes it span two rows
 - The second row uses `_` as a placeholder for the Category column
 - The cell content is "Electronics" (without the `[r2]` prefix in the output)
 
-## Multiple Rowspans
+## Multiple rowspans
 
 Multiple columns can have rowspans independently:
 
-<ListTable headerRows={1} caption="Team Schedule">
+<ListTable headerRows={1} caption="Team schedule" validation="strict">
 - - Team
   - Member
   - Task
@@ -85,9 +86,10 @@ Multiple columns can have rowspans independently:
   - 8
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Team Schedule">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Team schedule">
 - - Team
   - Member
   - Task
@@ -115,9 +117,9 @@ Multiple columns can have rowspans independently:
 </ListTable>
 ```
 
-## Large Rowspan
+## Large rowspan
 
-<ListTable headerRows={1} caption="Project Phases">
+<ListTable headerRows={1} caption="Project phases" validation="strict">
 - - Phase
   - Week
   - Deliverable
@@ -138,9 +140,10 @@ Multiple columns can have rowspans independently:
   - Working Product
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Project Phases">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Project phases">
 - - Phase
   - Week
   - Deliverable

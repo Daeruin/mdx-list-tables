@@ -2,15 +2,15 @@
 sidebar_position: 1
 ---
 
-# Simple Tables
+# Simple tables
 
 The most basic usage of ListTable creates a standard table from nested lists.
 
 import { ListTable } from '@site/src/components/ListTable';
 
-## Basic Table with Headers
+## Basic table with headers
 
-<ListTable headerRows={1} caption="Employee Directory">
+<ListTable headerRows={1} caption="Employee directory" validation="strict">
 - - Name
   - Department
   - Location
@@ -25,9 +25,10 @@ import { ListTable } from '@site/src/components/ListTable';
   - Austin
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} caption="Employee Directory">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} caption="Employee directory">
 - - Name
   - Department
   - Location
@@ -43,9 +44,9 @@ import { ListTable } from '@site/src/components/ListTable';
 </ListTable>
 ```
 
-## Table with Header and Footer
+## Table with header and footer
 
-<ListTable headerRows={1} footerRows={1} caption="Monthly Sales">
+<ListTable headerRows={1} footerRows={1} caption="Monthly sales" validation="strict">
 - - Month
   - Revenue
   - Expenses
@@ -63,9 +64,10 @@ import { ListTable } from '@site/src/components/ListTable';
   - $22,500
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} footerRows={1} caption="Monthly Sales">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} footerRows={1} caption="Monthly sales">
 - - Month
   - Revenue
   - Expenses
@@ -84,11 +86,11 @@ import { ListTable } from '@site/src/components/ListTable';
 </ListTable>
 ```
 
-## No Headers
+## No headers
 
-Tables don't require headers:
+Tables don't need to have headers:
 
-<ListTable caption="Simple Data">
+<ListTable caption="Simple data" validation="strict">
 - - A1
   - B1
   - C1
@@ -100,9 +102,10 @@ Tables don't require headers:
   - C3
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable caption="Simple Data">
+**MDX source**
+
+```jsx
+<ListTable caption="Simple data">
 - - A1
   - B1
   - C1
@@ -112,78 +115,5 @@ Tables don't require headers:
 - - A3
   - B3
   - C3
-</ListTable>
-```
-
-## Multiple Header Rows and Column Headers
-
-You can combine `headerRows` and `headerColumns` for complex table structures:
-
-<ListTable headerRows={2} headerColumns={1} caption="Regional Sales Data">
-- - [r2] Region
-  - [c2] Q1 2024
-  - _
-  - [c2] Q2 2024
-  - _
-- - _
-  - Sales
-  - Growth
-  - Sales
-  - Growth
-- - North
-  - $120K
-  - +15%
-  - $138K
-  - +18%
-- - South
-  - $95K
-  - +8%
-  - $103K
-  - +12%
-- - East
-  - $156K
-  - +22%
-  - $187K
-  - +20%
-- - West
-  - $142K
-  - +12%
-  - $159K
-  - +15%
-</ListTable>
-
-**MDX Source:**
-```mdx
-<ListTable headerRows={2} headerColumns={1} caption="Regional Sales Data">
-- - [r2] Region
-  - [c2] Q1 2024
-  - _
-  - [c2] Q2 2024
-  - _
-- - _
-  - Sales
-  - Growth
-  - Sales
-  - Growth
-- - North
-  - $120K
-  - +15%
-  - $138K
-  - +18%
-- - South
-  - $95K
-  - +8%
-  - $103K
-  - +12%
-- - East
-  - $156K
-  - +22%
-  - $187K
-  - +20%
-- - West
-  - $142K
-  - +12%
-  - $159K
-  - +15%
 </ListTable>
 ```

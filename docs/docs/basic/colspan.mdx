@@ -2,19 +2,19 @@
 sidebar_position: 3
 ---
 
-# Colspan Examples
+# Colspan examples
 
-Use `[c2]`, `[c3]`, etc. to make cells span multiple columns.
+Use `[c2]`, `[c3]`, etc. to make cells span multiple columns. Use `_` as a placeholder in following columns.
 
 import { ListTable } from '@site/src/components/ListTable';
 
-## Simple Colspan
+## Simple colspan
 
-<ListTable headerRows={2} caption="Sales by Region">
-- - [r2] Region
-  - [c2] Q1 Sales
+<ListTable headerRows={2} caption="Sales by region" validation="strict">
+- - [c3] Q1 Sales
   - _
-- - _
+  - _
+- - Region
   - Products
   - Services
 - - North
@@ -31,13 +31,14 @@ import { ListTable } from '@site/src/components/ListTable';
   - $40,000
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={2} caption="Sales by Region">
-- - [r2] Region
-  - [c2] Q1 Sales
+**MDX source**
+
+```jsx
+<ListTable headerRows={2} caption="Sales by region">
+- - [c3] Q1 Sales
   - _
-- - _
+  - _
+- - Region
   - Products
   - Services
 - - North
@@ -55,52 +56,16 @@ import { ListTable } from '@site/src/components/ListTable';
 </ListTable>
 ```
 
-**Key Points:**
-- `[c2]` makes "Q1 Sales" span 2 columns
-- In the header row with the colspan, we need a placeholder `_` after the colspan
-- The second header row has a placeholder `_` for the Region column, then Products and Services
+**Key points**
 
-## Multiple Headers
+- `[c3]` makes "Q1 Sales" span three columns
+- In the row with the colspan, we need a placeholder `_` after the colspan
 
-<ListTable headerRows={2} caption="Quarterly Performance">
-- - [c4] 2024 Performance Report
-- - Quarter
-  - Revenue
-  - Expenses
-  - Profit
-- - Q1
-  - $100,000
-  - $60,000
-  - $40,000
-- - Q2
-  - $120,000
-  - $70,000
-  - $50,000
-- - Q3
-  - $130,000
-  - $75,000
-  - $55,000
-- - Q4
-  - $150,000
-  - $85,000
-  - $65,000
-</ListTable>
+## Mixed colspan widths
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={2} caption="Quarterly Performance">
-- - [c4] 2024 Performance Report
-- - Quarter
-  - Revenue
-  - Expenses
-  - Profit
-...
-</ListTable>
-```
+You can have multiple colspans on the same row.
 
-## Mixed Colspan Widths
-
-<ListTable headerRows={2} caption="Product Comparison">
+<ListTable headerRows={2} caption="Product comparison" validation="strict">
 - - [r2] Feature
   - [c2] Basic Plan
   - _
@@ -133,9 +98,10 @@ import { ListTable } from '@site/src/components/ListTable';
   - Dedicated
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={2} caption="Product Comparison">
+**MDX source**
+
+```jsx
+<ListTable headerRows={2} caption="Product comparison">
 - - [r2] Feature
   - [c2] Basic Plan
   - _
@@ -169,9 +135,9 @@ import { ListTable } from '@site/src/components/ListTable';
 </ListTable>
 ```
 
-## Footer with Colspan
+## Footer with colspan
 
-<ListTable headerRows={1} footerRows={1} caption="Invoice Items">
+<ListTable headerRows={1} footerRows={1} caption="Invoice items" validation="strict">
 - - Item
   - Quantity
   - Price
@@ -194,9 +160,10 @@ import { ListTable } from '@site/src/components/ListTable';
   - $145.00
 </ListTable>
 
-**MDX Source:**
-```mdx
-<ListTable headerRows={1} footerRows={1} caption="Invoice Items">
+**MDX source**
+
+```jsx
+<ListTable headerRows={1} footerRows={1} caption="Invoice items">
 ...
 - - [c3] Grand Total
   - _
@@ -204,4 +171,3 @@ import { ListTable } from '@site/src/components/ListTable';
   - $145.00
 </ListTable>
 ```
-

@@ -7,14 +7,16 @@ import { ListTable } from '@site/src/components/ListTable';
 
 # ListTable component
 
-Welcome to the **ListTable** component documentation! This component allows you to create complex HTML tables with merged cells using simple Markdown list syntax.
+The **ListTable** component enables you to create complex HTML tables with merged cells using simple Markdown list syntax.
 
-## Why ListTable?
+## Why ListTable
 
-Traditional Markdown tables have serious drawbacks:
+Traditional Markdown tables have drawbacks:
 
-- Multi-line content doesn't work in table cells
+- True multi-line content doesn't work in table cells
 - Merged cells (rowspans and colspans) aren't supported
+- Table captions aren't supported
+- Header columns aren't supported
 - Markdown tables are often tedious to create and messy to read
 
 The ListTable component addresses all of these issues, and you won't have to manually type out HTML table tags.
@@ -27,7 +29,7 @@ Create a nested list inside the `<ListTable>` component. The outer list defines 
 
 ### Basic example
 
-```mdx
+```jsx
 <ListTable>
 - - A
   - B
@@ -42,7 +44,7 @@ Create a nested list inside the `<ListTable>` component. The outer list defines 
 
 **Result**
 
-<ListTable>
+<ListTable validation="strict">
 - - A
   - B
   - C
@@ -55,7 +57,7 @@ Create a nested list inside the `<ListTable>` component. The outer list defines 
 
 ListTable cells support multiple paragraphs, lists, block quotes, images, and so forth.
 
-<ListTable headerRows={1} caption="Multi-line content example">
+<ListTable headerRows={1} caption="Multi-line content example" validation="strict">
 - - Content type
   - Example
 - - Multiple paragraphs
@@ -80,7 +82,7 @@ ListTable cells support multiple paragraphs, lists, block quotes, images, and so
 
 **MDX source**
 
-```mdx
+```jsx
 <ListTable headerRows={1} caption="Multi-line content example">
 - - Content type
   - Example
@@ -112,11 +114,11 @@ Traditional Markdown doesn't support `rowspan` or `colspan` attributes in tables
 - `[r2]` - Creates a rowspan of 2
 - `[c3]` - Creates a colspan of 3
 - `[r2c3]` - Combines both (rowspan=2, colspan=3)
-- `_` - Placeholder for cells occupied by spans from above
+- `_` - Placeholder for cells occupied by earlier spans
 
 Here's a simple table with a rowspan:
 
-<ListTable headerRows={1} caption="Simple rowspan example">
+<ListTable headerRows={1} caption="Simple rowspan example" validation="strict">
 - - Name
   - Role
 - - [r2] Alice
@@ -129,7 +131,7 @@ Here's a simple table with a rowspan:
 
 **MDX source**
 
-```mdx
+```jsx
 <ListTable headerRows={1} caption="Simple rowspan example">
 - - Name
   - Role
@@ -142,7 +144,34 @@ Here's a simple table with a rowspan:
 </ListTable>
 ```
 
-## Browse the Examples
+## Custom styling
+
+Apply custom CSS classes with the `className` prop:
+
+```jsx
+<ListTable className="my-table striped-rows" headerRows={1}>
+- - Feature
+  - Status
+- - Dark mode
+  - Supported
+- - Responsive
+  - Built-in
+</ListTable>
+```
+
+Then style with CSS:
+
+```css
+.my-table {
+  border: 2px solid #333;
+}
+
+.striped-rows tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+```
+
+## Browse the examples
 
 Use the sidebar to explore different examples:
 
@@ -152,13 +181,15 @@ Use the sidebar to explore different examples:
 
 ## Installation
 
+Install using npm:
+
 ```bash
 npm install mdx-list-tables
 ```
 
 Then import and use in your MDX files:
 
-```mdx
+```jsx
 import { ListTable } from 'mdx-list-tables';
 
 <ListTable headerRows={1}>
